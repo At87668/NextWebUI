@@ -44,3 +44,6 @@ yarn-error.log*
 
 # Local Dev Doc
 docs.md
+
+# VS Code
+.vscode/
