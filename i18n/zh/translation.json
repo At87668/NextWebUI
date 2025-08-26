@@ -385,46 +385,13 @@
     "about": "NextWebUI\n基于Next.js的现代高性能聊天UI\n\n查看 "
   },
   "models": {
-    "qwen1": {
-      "5-14b-chat-awq": {
-        "description": "强大的 Qwen 模型 (7.5K Token 最大上下文)"
-      },
-      "5-7b-chat-awq": {
-        "description": "更小、更快、成本更低的 Qwen 模型 (20K Token 最大上下文)"
-      },
-      "5-1": {
-        "8b-chat": {
-          "description": "更小, 但拥有更长上下文支持的低成本 Qwen 模型 (32K Token 最大上下文)"
-        }
-      }
-    },
-    "gpt-oss-120b": {
-      "description": "强大的 OpenAI 开源模型, 能够解决大多数任务 (128K Token 最大上下文)"
-    },
-    "gpt-oss-20b": {
-      "description": "强大的 OpenAI 开源模型, 能够解决大多数日常任务 (128K Token 最大上下文)"
-    },
-    "deepseek-r1-32b": {
-      "description": "带有思考功能的 DeepSeek 开源模型, 能够解决大多数日常任务 (80K Token 最大上下文)"
-    },
-    "qwen2": {
-      "5-coder-32b-instruct": {
-        "description": "擅长代码编辑的 Qwen 开源模型, 能够解决大多数编程任务 (32K Token 最大上下文)"
-      }
-    },
-    "grok-2-vision": {
-      "description": "带有视觉能力的 Grok 模型 (32K Token 最大上下文)"
-    },
-    "grok-2": {
-      "description": "强大的的 Grok 模型 (128K Token 最大上下文)"
-    },
-    "grok-3-mini-beta": {
-      "description": "带有思考功能的 Grok 模型 (128K Token 最大上下文)"
-    },
-    "chat-model-guest": {
-      "description": "登录以使用其他模型"
-    }
+    "model1": {
+      "description": "Dev"
   },
+  "model2": {
+      "description": "Dev"
+  }
+},
   "errors": {
     "some_thing_wrong": "出了点问题, 请稍后重试。",
     "database_query_error": "执行数据库查询时出错。",

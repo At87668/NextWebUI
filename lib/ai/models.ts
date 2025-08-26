@@ -1,5 +1,5 @@
-export const DEFAULT_CHAT_MODEL: string = 'qwen1.5-7b-chat-awq';
-export const DEFAULT_CHAT_MODEL_GUEST: string = 'chat-model-guest';
+export const DEFAULT_CHAT_MODEL: string = 'model1';
+export const DEFAULT_CHAT_MODEL_GUEST: string = 'model1';
 
 export interface ChatModel {
   id: string;

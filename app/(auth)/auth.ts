@@ -70,7 +70,7 @@ export const {
           id: user.id,
           email: user.email,
           nick: user.nick,
-          type: 'regular',
+          type: 'regular' as UserType,
         };
       },
     }),

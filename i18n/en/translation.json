@@ -384,46 +384,13 @@
     "about": "NextWebUI\nThe modern, high-performance chat UI based on Next.js.\n\nView on "
   },
   "models": {
-    "qwen1": {
-      "5-14b-chat-awq": {
-        "description": "Powerful Qwen model (7.5K Token Max Context)"
-      },
-      "5-7b-chat-awq": {
-        "description": "Smaller, faster, lower cost Qwen model (20K Token Max Context)"
-      },
-      "5-1": {
-        "8b-chat": {
-          "description": "Smaller, Low-coster Qwen model with longer context support (32K Token Max Context)"
-        }
-      }
-    },
-    "gpt-oss-120b": {
-      "description": "Powerful OpenAI open-source model capable of solving most tasks (128K Token Max Context)"
-    },
-    "gpt-oss-20b": {
-      "description": "Powerful OpenAI open-source models capable of solving most everyday tasks (128K Token Max Context)"
-    },
-    "deepseek-r1-32b": {
-      "description": "DeepSeek open-source model with thinking capabilities, capable of solving most everyday tasks (80K Token Max Context)"
-    },
-    "qwen2": {
-      "5-coder-32b-instruct": {
-        "description": "Qwen open-source model that is good at code editing and can solve most programming tasks (32K Token Max Context)"
-      }
-    },
-    "grok-2-vision": {
-      "description": "Grok model with vision capabilities (32K Token Max Context)"
-    },
-    "grok-2": {
-      "description": "Powerful Grok model (128K Token Max Context)"
-    },
-    "grok-3-mini-beta": {
-      "description": "Grok model with thinking function (128K Token Max Context)"
-    },
-    "chat-model-guest": {
-      "description": "Login to use other models"
-    }
+    "model1": {
+      "description": "Dev"
   },
+  "model2": {
+      "description": "Dev"
+  }
+},
   "errors": {
     "some_thing_wrong": "Something went wrong, please try again later.",
     "database_query_error": "An error occurred while executing database query.",

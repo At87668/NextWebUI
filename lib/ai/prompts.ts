@@ -66,22 +66,7 @@ export const systemPrompt = ({
     return customSystemPrompt;
   }
 
-  if (
-    selectedChatModel === 'deepseek-r1-32b' ||
-    selectedChatModel === 'grok-3-mini-beta'
-  ) {
-    /*console.debug(
-      '[DEBUG] SystemPrompt:',
-      `${regularPrompt}\n\n${requestPrompt}`,
-    );*/
-    return `${regularPrompt}\n\n${requestPrompt}`;
-  } else {
-    /*console.debug(
-      '[DEBUG] SystemPrompt:',
-      `${regularPrompt}\n\n${requestPrompt}\n\n${artifactsPrompt}`,
-    );*/
     return `${regularPrompt}\n\n${requestPrompt}\n\n${artifactsPrompt}`;
-  }
 };
 
 export const codePrompt = `

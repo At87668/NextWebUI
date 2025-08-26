@@ -1,9 +1,9 @@
 {
-  "name": "ai-chatbot",
-  "version": "3.1.0",
+  "name": "nextwebui",
+  "version": "1.0.2",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbo",
+    "dev": "next dev --turbo -p 3001",
     "build": "tsx lib/db/migrate && next build",
     "start": "next start --turbo",
     "lint": "next lint && biome lint --write --unsafe",
