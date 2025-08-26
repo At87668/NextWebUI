@@ -1,0 +1,466 @@
+{
+  "forgetpass": {
+    "no_email": "请输入邮箱地址!",
+    "code": {
+      "send": {
+        "fail": "验证码发送失败",
+        "success": "验证码已发送到邮箱"
+      },
+      "input": {
+        "error": "验证码错误"
+      },
+      "expried": "验证码已过期, 请重新获取"
+    },
+    "password": {
+      "reset": {
+        "success": "密码已重置",
+        "fail": "密码重置失败"
+      }
+    }
+  },
+  "password": {
+    "not_compliant": "密码需8-32位, 且包含字母、数字和符号",
+    "update": {
+      "original_password_wrong": "原密码错误",
+      "same_password": "新旧密码相同"
+    }
+  },
+  "network": {
+    "error": "网络错误，请稍后重试"
+  },
+  "recover_password": {},
+  "password_recover": {
+    "title": "找回密码",
+    "subtitle": "输入你的注册邮箱, 我们会发送重置密码验证码",
+    "reset_password": "重置密码",
+    "remember_password": "想起了密码?",
+    "back_to_login": "返回登录"
+  },
+  "auth": {
+    "email_address": "邮箱地址",
+    "verify_code": "验证码",
+    "verify_code_input": "输入验证码",
+    "verify_code_reget": "后重试",
+    "verify_code_get": "获取验证码",
+    "new_password": "新密码",
+    "invalid_credential": "凭据无效!",
+    "unable_to_verify_submission": "无法验证您的提交!",
+    "require_email": "请输入邮箱地址!",
+    "password": "密码",
+    "user": {
+      "type": {
+        "guest": "访客"
+      }
+    },
+    "state": {
+      "loading": "正在检查身份验证状态，请稍后重试！"
+    }
+  },
+  "login": {
+    "title": "登录",
+    "subtitle": "输入你的邮箱地址和密码进行登录",
+    "forget_password": "忘记密码?",
+    "havent_account": "没有账号? 免费",
+    "register": "注册",
+    "register_one": "一个",
+    "agreed_privacy": "登录即代表您已阅读并同意"
+  },
+  "privacy": "隐私声明与免责条款",
+  "register": {
+    "already_exists": "帐户已经存在！",
+    "create": {
+      "failed": "创建账号失败!",
+      "success": "成功创建账号!"
+    },
+    "code": {
+      "send": {
+        "fail": "验证码发送失败",
+        "success": "验证码已发送到邮箱"
+      },
+      "input": {
+        "error": "验证码错误"
+      },
+      "expried": "验证码已过期, 请重新获取"
+    },
+    "password_inconsistent": "输入的密码不一致",
+    "please_agree_privacy": "请同意隐私条款以继续注册",
+    "title": "注册",
+    "subtitle": "输入你的邮箱地址和密码进行账号创建",
+    "confirm_password": "确认密码",
+    "enter_again": "请再次输入密码",
+    "agreed": "我已阅读并同意",
+    "have_account": "已经有了一个账号? 进行"
+  },
+  "upload": {
+    "flie_type_error": "文件类型只能为 JPEG 或 PNG",
+    "file_to_large": "文件必须小于 1MB",
+    "no_flie_uploaded": "没有文件被上传",
+    "failed": "上传失败"
+  },
+  "nick": {
+    "incompliance": "昵称不能为空且不能超过32字符",
+    "update": {
+      "fail": "昵称更新失败"
+    }
+  },
+  "artifacts": {
+    "run": {
+      "lable": "运行",
+      "description": "运行代码"
+    },
+    "version": {
+      "prev": "查看上一个版本",
+      "next": "查看下一个版本"
+    },
+    "copy": "复制至剪贴板",
+    "copy_success": "已复制至剪贴板!",
+    "add_comments": "添加注释",
+    "add_logs": "添加日志",
+    "copy_in_csv": "以 .csv 复制",
+    "copy_in_csv_success": "已以 .csv 复制至剪贴板!",
+    "data": {
+      "clean_and_format": "清理和格式化数据",
+      "analyze_and_visualize": "分析和可视化数据"
+    },
+    "view_changes": "查看更改",
+    "add_final_touches": "添加最终润色",
+    "request_suggestion": "请求建议"
+  },
+  "components": {
+    "dialog": {
+      "close": "关闭对话框"
+    },
+    "sidebar": {
+      "toggle": "切换侧边栏"
+    },
+    "app_sidebar": {
+      "new_chat": "新聊天"
+    },
+    "chat_header": {
+      "new_chat": "新聊天"
+    },
+    "console": {
+      "console": "控制台"
+    },
+    "document": {
+      "create": {
+        "ing": "创建中",
+        "ed": "已创建"
+      },
+      "update": {
+        "ing": "更新中",
+        "ed": "已更新"
+      },
+      "suggestion": {
+        "ing": "添加建议中",
+        "ed": "已添加建议至"
+      },
+      "public_view": "目前不支持在共享聊天中进行此操作。"
+    },
+    "greeting": {
+      "title": "你好!",
+      "subtitle": "今天能帮你什么?"
+    },
+    "image_editor": {
+      "generating": "生成图像中..."
+    },
+    "message_actions": {
+      "no_copyable_text": "没有可复制的文本",
+      "copyed": "已复制至剪贴板",
+      "copy": "复制",
+      "vote": {
+        "up": {
+          "ing": "正在对回复表示赞成...",
+          "ed": "已对回复表示赞成",
+          "fail": "未能对回复表示赞成",
+          "button": "赞成"
+        },
+        "down": {
+          "ing": "正在对回复表示不赞成...",
+          "ed": "已对回复表示不赞成",
+          "fail": "未能对回复表示不赞成",
+          "button": "不赞成"
+        }
+      }
+    },
+    "nickname_editor": {
+      "empty": "昵称不能为空",
+      "update": {
+        "fali": "更新失败"
+      }
+    },
+    "sidebar_history_item": {
+      "chat_title": {
+        "edit": "编辑聊天标题"
+      },
+      "chat": {
+        "open": "打开聊天"
+      }
+    },
+    "sidebar_history": {
+      "chat": {
+        "delete": {
+          "ing": "正在删除聊天...",
+          "ed": "已删除聊天",
+          "fail": "删除聊天失败"
+        },
+        "history": {
+          "guest": "登录以保存并重新访问以前的聊天记录!",
+          "today": "今天",
+          "no_item": "开始聊天后，您的对话将显示在此处!",
+          "yesterday": "昨天",
+          "7_days_before": "过去7天",
+          "30_days_before": "过去30天",
+          "early_than_month": "早于一个月",
+          "end": "你已到达聊天记录的底部",
+          "loading": "加载聊天中..."
+        }
+      },
+      "delete": {
+        "dialog": {
+          "title": "你绝对确定吗?",
+          "description": "此操作无法撤消, 这将永久删除您的聊天并将其从我们的服务器中删除。"
+        },
+        "invalid_session": "会话无效，无法清空聊天记录"
+      }
+    },
+    "sidebar_toggle": {
+      "button": "切换侧边栏"
+    },
+    "sidebar_user_nav": {
+      "auth_state": {
+        "loading": "加载登录状态中..."
+      },
+      "user": {
+        "avatar": "用户头像"
+      }
+    },
+    "submit_button": {
+      "loading": "加载中...",
+      "submit": "提交表单"
+    },
+    "suggested_actions": {
+      "1": {
+        "title": "告诉我一个事实",
+        "label": "关于罗马帝国",
+        "action": "告诉我一个关于罗马帝国的随机有趣事实"
+      },
+      "2": {
+        "title": "编写代码",
+        "label": "演示 djikstra 的算法",
+        "action": "编写代码来演示 djikstra 的算法"
+      },
+      "3": {
+        "title": "帮我写一篇论文",
+        "label": "关于硅谷",
+        "action": "帮我写一篇关于硅谷的论文"
+      },
+      "4": {
+        "title": "帮助我学习",
+        "label": "高考英语词汇",
+        "action": "帮我学习高考词汇：为我写一些英语填空句子(选择题), 我会尝试选择正确的选项"
+      }
+    },
+    "suggestion": {
+      "assistant": "助理"
+    },
+    "version-footer": {
+      "title": "您正在查看以前的版本",
+      "subtitle": "恢复此版本以进行编辑",
+      "button": {
+        "revert": "恢复此版本",
+        "back": "返回最新版本"
+      }
+    },
+    "visibility-selector": {
+      "private": {
+        "label": "私有",
+        "description": "只有您可以访问此聊天"
+      },
+      "public": {
+        "description": "任何知道链接的人都可以访问此聊天",
+        "label": "公开"
+      }
+    },
+    "multimodal-input": {
+      "upload": {
+        "fail": "未能上传文件, 请重试!",
+        "wrong": "上传文件时出错!"
+      },
+      "textarea": {
+        "placeholder": "发送一条消息..."
+      },
+      "waiting": "请等待模型完成响应!"
+    }
+  },
+  "button": {
+    "save": "保存",
+    "cencel": "取消",
+    "more": "更多",
+    "share": "分享",
+    "private": "私有",
+    "public": "公开",
+    "edit": "编辑",
+    "delete": "删除",
+    "continue": "继续",
+    "login": "登录你的账户",
+    "logout": "退出登录",
+    "add": "添加"
+  },
+  "settings": {
+    "title": "设置",
+    "close_settings": "关闭设置",
+    "sub": {},
+    "tabs": {
+      "interface": "界面",
+      "chat": "聊天",
+      "user": "用户",
+      "about": "关于",
+      "theme_": {
+        "description": "选择你喜欢的主题模式。",
+        "light": "亮白",
+        "dark": "暗黑",
+        "auto": "自动",
+        "auto_": {
+          "description": "选择“自动”时，主题会跟随系统深色/浅色模式自动切换。"
+        },
+        "now": "当前: "
+      },
+      "chat_": {
+        "description": "管理聊天相关的设置。",
+        "system_prompt": "系统提示词",
+        "system_prompt_": {
+          "placeholder": "可选，设置对话的系统提示词...（支持多行）",
+          "description": "可自定义对话的系统提示词。",
+          "cant_load": "无法加载原始提示词",
+          "save": {
+            "success": "已保存",
+            "fail": "保存失败",
+            "ing": "保存中..."
+          }
+        },
+        "clean": {
+          "ing": "清理中...",
+          "button": "清空所有聊天记录",
+          "warn": "(此操作不可恢复)",
+          "success": "已清空所有聊天记录",
+          "fail": "清空失败"
+        }
+      },
+      "user_": {
+        "description": "头像、昵称、密码等设置",
+        "avatar": "用户头像",
+        "nick": {
+          "edit": "编辑昵称",
+          "update": {
+            "success": "昵称已更新"
+          }
+        },
+        "avatar_": {
+          "description": "如需更换头像，请前往 ",
+          "gravatar": "Gravatar",
+          "description_": " 网站设置，系统将自动同步。"
+        },
+        "change_password": {
+          "title": "修改密码",
+          "success": "密码已更新，请重新登录",
+          "fail": "密码更新失败",
+          "current_password": "当前密码",
+          "current_password_placeholder": "请输入当前密码",
+          "new_password": "新密码",
+          "save": {
+            "ing": "保存中..."
+          }
+        }
+      },
+      "language_": {
+        "current": "当前语言:",
+        "description": "选择你喜欢的语言"
+      },
+      "language": "语言",
+      "theme": "主题"
+    }
+  },
+  "website": {
+    "about": "NextWebUI\n基于Next.js的现代高性能聊天UI\n\n查看 "
+  },
+  "models": {
+    "qwen1": {
+      "5-14b-chat-awq": {
+        "description": "强大的 Qwen 模型 (7.5K Token 最大上下文)"
+      },
+      "5-7b-chat-awq": {
+        "description": "更小、更快、成本更低的 Qwen 模型 (20K Token 最大上下文)"
+      },
+      "5-1": {
+        "8b-chat": {
+          "description": "更小, 但拥有更长上下文支持的低成本 Qwen 模型 (32K Token 最大上下文)"
+        }
+      }
+    },
+    "gpt-oss-120b": {
+      "description": "强大的 OpenAI 开源模型, 能够解决大多数任务 (128K Token 最大上下文)"
+    },
+    "gpt-oss-20b": {
+      "description": "强大的 OpenAI 开源模型, 能够解决大多数日常任务 (128K Token 最大上下文)"
+    },
+    "deepseek-r1-32b": {
+      "description": "带有思考功能的 DeepSeek 开源模型, 能够解决大多数日常任务 (80K Token 最大上下文)"
+    },
+    "qwen2": {
+      "5-coder-32b-instruct": {
+        "description": "擅长代码编辑的 Qwen 开源模型, 能够解决大多数编程任务 (32K Token 最大上下文)"
+      }
+    },
+    "grok-2-vision": {
+      "description": "带有视觉能力的 Grok 模型 (32K Token 最大上下文)"
+    },
+    "grok-2": {
+      "description": "强大的的 Grok 模型 (128K Token 最大上下文)"
+    },
+    "grok-3-mini-beta": {
+      "description": "带有思考功能的 Grok 模型 (128K Token 最大上下文)"
+    },
+    "chat-model-guest": {
+      "description": "登录以使用其他模型"
+    }
+  },
+  "errors": {
+    "some_thing_wrong": "出了点问题, 请稍后重试。",
+    "database_query_error": "执行数据库查询时出错。",
+    "bad_request": {
+      "api": "请求无法处理, 请检查您的输入并重试",
+      "document": "创建或更新文档的请求无效。请检查您的输入并重试。"
+    },
+    "unauthorized": {
+      "auth": "在继续之前, 您需要登录",
+      "chat": "您需要登录才能查看此聊天。请登录并重试。",
+      "document": "您需要登录才能查看此文档。请登录并重试。"
+    },
+    "invalidtoken": {
+      "auth": "会话无效, 您需要重新登录"
+    },
+    "rate_limit": {
+      "chat": "您已超过当天的最大消息数。请稍后重试。"
+    },
+    "not_found": {
+      "chat": "未找到请求的聊天。请检查聊天 ID 并重试。",
+      "document": "未找到所要求的文档。请检查文档 ID 并重试。"
+    },
+    "forbidden": {
+      "chat": "此聊天属于其他用户。请检查聊天 ID 并重试。",
+      "document": "此文档属于其他用户。请检查文档 ID 并重试。"
+    },
+    "offline": {
+      "chat": "我们在发送您的消息时遇到问题。请检查您的互联网连接并重试。"
+    }
+  },
+  "errosr": {
+    "forbidden": {
+      "auth": "您的帐户无权访问此功能"
+    }
+  },
+  "request": {
+    "failed": "请求失败"
+  }
+}

@@ -1,0 +1,465 @@
+{
+  "forgetpass": {
+    "no_email": "Please enter your email address!",
+    "code": {
+      "send": {
+        "fail": "The verification code failed to be sent.",
+        "success": "The verification code has been sent to mailbox"
+      },
+      "input": {
+        "error": "Verify code errors"
+      },
+      "expried": "The verification code has expired, please get it again."
+    },
+    "password": {
+      "reset": {
+        "success": "The password has been reset.",
+        "fail": "Password reset failed."
+      }
+    }
+  },
+  "password": {
+    "not_compliant": "Password needs 8-32 digits long and contains letters, numbers, and symbols.",
+    "update": {
+      "original_password_wrong": "The original password is wrong",
+      "same_password": "The old and new passwords are the same."
+    }
+  },
+  "network": {
+    "error": "Network error, please try again later."
+  },
+  "recover_password": {},
+  "password_recover": {
+    "title": "Password Recover",
+    "subtitle": "Enter your registered email address, we will send you a password reset code.",
+    "reset_password": "Reset Password",
+    "remember_password": "Remember the password?",
+    "back_to_login": "Back to login."
+  },
+  "auth": {
+    "email_address": "Email Address",
+    "verify_code": "Verify Code",
+    "verify_code_input": "Enter verification code",
+    "verify_code_reget": "to retry",
+    "verify_code_get": "Get Verify Code",
+    "new_password": "New Password",
+    "invalid_credential": "Invalid credentials!",
+    "unable_to_verify_submission": "Unable to verify your submission!",
+    "require_email": "Please enter your email address!",
+    "password": "Password",
+    "user": {
+      "type": {
+        "guest": "Guest"
+      }
+    },
+    "state": {
+      "loading": "Checking the authentication status, please try again later!"
+    }
+  },
+  "login": {
+    "title": "Login",
+    "subtitle": "Enter your email address and password to sign in",
+    "forget_password": "Forgot password?",
+    "register": "register",
+    "havent_account": "Don't have an account? Free to",
+    "register_one": "one.",
+    "agreed_privacy": "By logging in, you have read and agreed"
+  },
+  "privacy": "Privacy & Disclaimer",
+  "register": {
+    "already_exists": "Account already exists!",
+    "create": {
+      "failed": "Failed to create an account!",
+      "success": "Successfully create account!"
+    },
+    "code": {
+      "send": {
+        "fail": "The verification code failed to be sent.",
+        "success": "The verification code has been sent to mailbox"
+      },
+      "input": {
+        "error": "Verify code errors"
+      },
+      "expried": "The verification code has expired, please get it again."
+    },
+    "password_inconsistent": "Password entered is inconsistent.",
+    "please_agree_privacy": "Please agree to the privacy policy to continue registering.",
+    "title": "Register",
+    "subtitle": "Enter your email address and password to create account",
+    "confirm_password": "Confirm Password",
+    "enter_again": "Please enter the password again.",
+    "agreed": "I have read and agreed",
+    "have_account": "Already have an account?"
+  },
+  "upload": {
+    "flie_type_error": "The file type can only be JPEG or PNG",
+    "file_to_large": "The file must be less than 1MB",
+    "no_flie_uploaded": "No files were uploaded",
+    "failed": "Upload failed"
+  },
+  "nick": {
+    "incompliance": "Nicknames cannot be empty and cannot exceed 32 characters.",
+    "update": {
+      "fail": "Nick update failed."
+    }
+  },
+  "artifacts": {
+    "run": {
+      "lable": "Run",
+      "description": "Execute code"
+    },
+    "version": {
+      "prev": "Check out the previous version",
+      "next": "Check out the next version"
+    },
+    "copy": "Copy to clipboard",
+    "copy_success": "Copied to clipboard!",
+    "add_comments": "Add comments",
+    "add_logs": "Add logs",
+    "copy_in_csv": "Copy in .csv",
+    "copy_in_csv_success": "Copied to clipboard in .csv!",
+    "data": {
+      "clean_and_format": "Clean and format data",
+      "analyze_and_visualize": "Analyze and visualize data"
+    },
+    "view_changes": "View changes",
+    "add_final_touches": "Add the final touches",
+    "request_suggestion": "Request Suggestion"
+  },
+  "components": {
+    "dialog": {
+      "close": "Close Dialog Box"
+    },
+    "sidebar": {
+      "toggle": "Toggle Sidebar"
+    },
+    "app_sidebar": {
+      "new_chat": "New Chat"
+    },
+    "chat_header": {
+      "new_chat": "New Chat"
+    },
+    "console": {
+      "console": "Console"
+    },
+    "document": {
+      "create": {
+        "ing": "Creating",
+        "ed": "Created"
+      },
+      "update": {
+        "ing": "Updating",
+        "ed": "Updated"
+      },
+      "suggestion": {
+        "ing": "Adding suggestions",
+        "ed": "Suggestions have been added to"
+      },
+      "public_view": "This is not currently supported in a shared chat."
+    },
+    "greeting": {
+      "title": "Hello!",
+      "subtitle": "What can help you today?"
+    },
+    "image_editor": {
+      "generating": "Generating Image..."
+    },
+    "message_actions": {
+      "no_copyable_text": "There is no copyable text.",
+      "copyed": "Copied to clipboard",
+      "copy": "Copy",
+      "vote": {
+        "up": {
+          "ing": "Upvoting on the response...",
+          "ed": "Upvoted on the response.",
+          "fail": "Failure to upvote the response",
+          "button": "Upvote"
+        },
+        "down": {
+          "ing": "Downvoting on the response...",
+          "ed": "Downvoted on the response.",
+          "fail": "Failure to downvote the response",
+          "button": "Downvote"
+        }
+      }
+    },
+    "nickname_editor": {
+      "empty": "Nicknames cannot be empty.",
+      "update": {
+        "fali": "Update failed."
+      }
+    },
+    "sidebar_history_item": {
+      "chat_title": {
+        "edit": "Edit Chat Title"
+      },
+      "chat": {
+        "open": "Open Chat"
+      }
+    },
+    "sidebar_history": {
+      "chat": {
+        "delete": {
+          "ing": "Deleting chat...",
+          "ed": "Deleted chat.",
+          "fail": "Deleting chat failed."
+        },
+        "history": {
+          "guest": "Log in to save and revisit your previous chats!",
+          "today": "Today",
+          "no_item": "Once you start a chat, your chats will appear here!",
+          "yesterday": "Yesterday",
+          "7_days_before": "Past 7 days",
+          "30_days_before": "Past 30 days",
+          "early_than_month": "Earlier than a month",
+          "end": "You've reached the bottom of your chat history.",
+          "loading": "Loading chats..."
+        }
+      },
+      "delete": {
+        "dialog": {
+          "title": "Are you absolutely sure?",
+          "description": "This action cannot be undone, which will permanently delete your chat and remove it from our server."
+        },
+        "invalid_session": "Session is invalid and the chat history cannot be cleared."
+      }
+    },
+    "sidebar_toggle": {
+      "button": "Toggle Sidebar"
+    },
+    "sidebar_user_nav": {
+      "auth_state": {
+        "loading": "Loading auth state..."
+      },
+      "user": {
+        "avatar": "User avatar"
+      }
+    },
+    "submit_button": {
+      "loading": "Loading...",
+      "submit": "Submit Form"
+    },
+    "suggested_actions": {
+      "1": {
+        "title": "Tell me a fact",
+        "label": "About the Roman Empire",
+        "action": "Tell me a random interesting fact about the Roman Empire."
+      },
+      "2": {
+        "title": "Write code",
+        "label": "Demonstrate djikstra's algorithm",
+        "action": "Write code to demonstrate djikstra's algorithm."
+      },
+      "3": {
+        "title": "Help me write an essay",
+        "label": "About Silicon Valley",
+        "action": "Help me write an essay on Silicon Valley."
+      },
+      "4": {
+        "title": "Help me learn",
+        "label": "College Entrance Examination English Vocabulary",
+        "action": "Help me learn college entrance examination vocabulary: Write some fill-in-the-blank sentences in English (multiple-choice questions), and I will try to choose the right option."
+      }
+    },
+    "suggestion": {
+      "assistant": "Assistant"
+    },
+    "version-footer": {
+      "title": "You are viewing a previous version.",
+      "subtitle": "Revert this version for editing.",
+      "button": {
+        "revert": "Revert this version",
+        "back": "Back to latest version"
+      }
+    },
+    "visibility-selector": {
+      "private": {
+        "label": "Private",
+        "description": "Only you can access this chat."
+      },
+      "public": {
+        "description": "Anyone with the link can access this chat.",
+        "label": "Public"
+      }
+    },
+    "multimodal-input": {
+      "upload": {
+        "fail": "Failed to upload files, please try again!",
+        "wrong": "Error uploading files!"
+      },
+      "textarea": {
+        "placeholder": "Send a message..."
+      },
+      "waiting": "Please wait for the model to finish responding!"
+    }
+  },
+  "button": {
+    "save": "Save",
+    "cencel": "Cencel",
+    "more": "More",
+    "share": "Share",
+    "private": "Private",
+    "public": "Public",
+    "edit": "Edit",
+    "delete": "Delete",
+    "continue": "Continue",
+    "login": "Login your account",
+    "logout": "Logout",
+    "add": "Add"
+  },
+  "settings": {
+    "title": "Settings",
+    "close_settings": "Close Settings",
+    "tabs": {
+      "interface": "Interface",
+      "chat": "Chat",
+      "user": "User",
+      "about": "About",
+      "theme_": {
+        "description": "Choose your preferred theme mode.",
+        "light": "Light",
+        "dark": "Dark",
+        "auto": "Auto",
+        "auto_": {
+          "description": "When you select Auto, the theme automatically switches with the system dark/light mode."
+        },
+        "now": "Now: "
+      },
+      "chat_": {
+        "description": "Manage chat-related settings.",
+        "system_prompt": "System Prompt",
+        "system_prompt_": {
+          "placeholder": "Optionally, set the system prompt for chat... (Support multiple rows)",
+          "description": "Customizable system prompts for chat.",
+          "cant_load": "Unable to load the original prompt.",
+          "save": {
+            "success": "Saved",
+            "fail": "Save failed",
+            "ing": "Saving..."
+          }
+        },
+        "clean": {
+          "ing": "Cleaning...",
+          "button": "Clear all chat history",
+          "warn": "(This action is not recoverable)",
+          "success": "All chat history has been cleared.",
+          "fail": "Emptying failed."
+        }
+      },
+      "user_": {
+        "description": "Avatar, nickname, password, and other settings",
+        "avatar": "User Avatar",
+        "nick": {
+          "edit": "Edit Nick",
+          "update": {
+            "success": "Nick Updated"
+          }
+        },
+        "avatar_": {
+          "description": "To change your avatar, go to ",
+          "gravatar": "Gravatar",
+          "description_": " to setting, system will automatically sync."
+        },
+        "change_password": {
+          "title": "Change Password",
+          "success": "Password has been updated, please relogin.",
+          "fail": "Password update failed.",
+          "current_password": "Current Password",
+          "current_password_placeholder": "Please enter your current password.",
+          "new_password": "New Password",
+          "save": {
+            "ing": "Saving..."
+          }
+        }
+      },
+      "language_": {
+        "current": "Current language:",
+        "description": "Select your preferred language."
+      },
+      "language": "Language",
+      "theme": "Theme"
+    }
+  },
+  "website": {
+    "about": "NextWebUI\nThe modern, high-performance chat UI based on Next.js.\n\nView on "
+  },
+  "models": {
+    "qwen1": {
+      "5-14b-chat-awq": {
+        "description": "Powerful Qwen model (7.5K Token Max Context)"
+      },
+      "5-7b-chat-awq": {
+        "description": "Smaller, faster, lower cost Qwen model (20K Token Max Context)"
+      },
+      "5-1": {
+        "8b-chat": {
+          "description": "Smaller, Low-coster Qwen model with longer context support (32K Token Max Context)"
+        }
+      }
+    },
+    "gpt-oss-120b": {
+      "description": "Powerful OpenAI open-source model capable of solving most tasks (128K Token Max Context)"
+    },
+    "gpt-oss-20b": {
+      "description": "Powerful OpenAI open-source models capable of solving most everyday tasks (128K Token Max Context)"
+    },
+    "deepseek-r1-32b": {
+      "description": "DeepSeek open-source model with thinking capabilities, capable of solving most everyday tasks (80K Token Max Context)"
+    },
+    "qwen2": {
+      "5-coder-32b-instruct": {
+        "description": "Qwen open-source model that is good at code editing and can solve most programming tasks (32K Token Max Context)"
+      }
+    },
+    "grok-2-vision": {
+      "description": "Grok model with vision capabilities (32K Token Max Context)"
+    },
+    "grok-2": {
+      "description": "Powerful Grok model (128K Token Max Context)"
+    },
+    "grok-3-mini-beta": {
+      "description": "Grok model with thinking function (128K Token Max Context)"
+    },
+    "chat-model-guest": {
+      "description": "Login to use other models"
+    }
+  },
+  "errors": {
+    "some_thing_wrong": "Something went wrong, please try again later.",
+    "database_query_error": "An error occurred while executing database query.",
+    "bad_request": {
+      "api": "Request cannot be processed, please check your input and try again.",
+      "document": "Requests to create or update documents are invalid. Please check your input and try again."
+    },
+    "unauthorized": {
+      "auth": "Before proceeding, you need to login.",
+      "chat": "You need to be logged in to view this chat. Please login and try again.",
+      "document": "You need to be logged in to view this document. Please login and try again."
+    },
+    "invalidtoken": {
+      "auth": "The session is invalid and you need to login again."
+    },
+    "rate_limit": {
+      "chat": "You've exceeded the maximum number of messages for the day. Please try again later."
+    },
+    "not_found": {
+      "chat": "Requested chat was not found. Please check the chat ID and try again.",
+      "document": "The requested document was not found. Please check the document ID and try again."
+    },
+    "forbidden": {
+      "chat": "This chat belongs to another user. Please check the chat ID and try again.",
+      "document": "This document belongs to another user. Please check the document ID and try again."
+    },
+    "offline": {
+      "chat": "We are having trouble sending your message. Please check your internet connection and try again."
+    }
+  },
+  "errosr": {
+    "forbidden": {
+      "auth": "Your account does not have access to this feature."
+    }
+  },
+  "request": {
+    "failed": "Request failed"
+  }
+}
