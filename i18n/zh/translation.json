@@ -382,16 +382,8 @@
     }
   },
   "website": {
-    "about": "NextWebUI\n基于Next.js的现代高性能聊天UI\n\n查看 "
+    "about": "NextWebUI\n基于Next.js的现代高性能AI聊天UI\n\n查看 "
   },
-  "models": {
-    "model1": {
-      "description": "Dev"
-  },
-  "model2": {
-      "description": "Dev"
-  }
-},
   "errors": {
     "some_thing_wrong": "出了点问题, 请稍后重试。",
     "database_query_error": "执行数据库查询时出错。",

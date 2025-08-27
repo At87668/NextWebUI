@@ -24,7 +24,6 @@ export async function GET(request: Request) {
 
   const isGuest = session.user.type === 'guest';
 
-  // 对非 guest 检查白名单
   if (!isGuest) {
     const storedUserId = await redis.get(`jti:whitelist:${jti}`);
     if (storedUserId !== userId) {

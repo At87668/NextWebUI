@@ -9,6 +9,7 @@ import {
   primaryKey,
   foreignKey,
   boolean,
+  integer,
 } from 'drizzle-orm/pg-core';
 
 export const user = pgTable('User', {
@@ -17,6 +18,27 @@ export const user = pgTable('User', {
   email: varchar('email', { length: 64 }).notNull(),
   password: varchar('password', { length: 64 }),
   systemPrompt: text('systemPrompt'),
+});
+
+export const group = pgTable('Group', {
+  group: varchar('group', { length: 50 }).notNull().primaryKey(),
+
+  models: varchar('models', { length: 255 })
+    .array()
+    .notNull(),
+});
+
+export const models = pgTable('Models', {
+  id: text('id').notNull(),
+  name: text('name').notNull(),
+  model_description: text('description'),
+  default_prompt: text('default_prompt'),
+  max_token: integer('max_token'),
+  type: varchar('type', { enum: ['openai', 'ollama'] })
+    .notNull()
+    .default('openai'),
+  api_base_url: text('api_base_url'),
+  api_key: text('api_key'),
 });
 
 export type User = InferSelectModel<typeof user>;

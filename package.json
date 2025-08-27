@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbo -p 3001",
-    "build": "tsx lib/db/migrate && next build",
+    "build": "tsx lib/db/migrate && next build --turbo",
     "start": "next start --turbo",
     "lint": "next lint && biome lint --write --unsafe",
     "lint:fix": "next lint --fix && biome lint --write --unsafe",
@@ -69,6 +69,7 @@
     "next-auth": "5.0.0-beta.25",
     "next-i18next": "^15.4.2",
     "next-themes": "^0.3.0",
+    "ollama-ai-provider-v2": "^1.2.1",
     "orderedmap": "^2.1.1",
     "papaparse": "^5.5.2",
     "postgres": "^3.4.4",

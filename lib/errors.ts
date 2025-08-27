@@ -5,7 +5,8 @@ export type ErrorType =
   | 'forbidden'
   | 'not_found'
   | 'rate_limit'
-  | 'offline';
+  | 'offline'
+  | 'default';
 
 export type Surface =
   | 'chat'
@@ -109,6 +110,9 @@ export function getMessageByErrorCode(errorCode: ErrorCode): string {
       return 'errors.unauthorized.document';
     case 'bad_request:document':
       return 'errors.bad_request.document';
+
+    case 'default:api':
+      return 'errors.some_thing_wrong';
 
     default:
       return 'errors.some_thing_wrong';

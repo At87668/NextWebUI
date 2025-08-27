@@ -24,7 +24,6 @@ export async function POST(req: Request) {
 
     const isGuest = session.user.type === 'guest';
 
-    // 对非 guest 检查白名单
     if (!isGuest) {
       const storedUserId = await redis.get(`jti:whitelist:${jti}`);
       if (storedUserId !== userId) {
@@ -35,12 +34,12 @@ export async function POST(req: Request) {
     if (!oldPassword || !newPassword) {
       return NextResponse.json({ error: 'Missing parameters.' }, { status: 400 });
     }
-    // 获取当前用户
+
     const [user] = await getUser(session.user.email ?? '');
     if (!user) {
       return NextResponse.json({ error: 'The user does not exist.' }, { status: 404 });
     }
-    // 校验密码
+
     const bcrypt = await import('bcrypt-ts');
     const match = await bcrypt.compare(oldPassword, user.password ?? '');
     if (!match) {
@@ -49,19 +48,19 @@ export async function POST(req: Request) {
     if (newPassword === oldPassword) {
       return NextResponse.json({ error: 'password.update.same_password' }, { status: 400 });
     }
-    // 修改密码
+
     await updateUser(userEmail, newPassword);
 
     const userJtiSetKey = `user:jti:set:${userId}`;
     const jtiList: string[] = await redis.smembers(userJtiSetKey);
 
     if (jtiList.length > 0) {
-      // 批量删除白名单中的 jti
+
       const pipeline = redis.pipeline();
       for (const jti of jtiList) {
         pipeline.del(`jti:whitelist:${jti}`);
       }
-      // 删除用户 jti 集合
+
       pipeline.del(userJtiSetKey);
       await pipeline.exec();
 

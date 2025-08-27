@@ -381,16 +381,8 @@
     }
   },
   "website": {
-    "about": "NextWebUI\nThe modern, high-performance chat UI based on Next.js.\n\nView on "
+    "about": "NextWebUI\nThe modern, high-performance AI chat UI based on Next.js.\n\nView on "
   },
-  "models": {
-    "model1": {
-      "description": "Dev"
-  },
-  "model2": {
-      "description": "Dev"
-  }
-},
   "errors": {
     "some_thing_wrong": "Something went wrong, please try again later.",
     "database_query_error": "An error occurred while executing database query.",

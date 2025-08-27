@@ -8,9 +8,8 @@ import { SessionProvider } from 'next-auth/react';
 import { ApiInterceptorProvider } from '@/components/api-interceptor-provider';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://chat.star-dust.link/'),
-  title: 'NextgenChat',
-  description: 'NextgenChat is a AI chatbot based on Next.js.',
+  title: 'NextWebUI',
+  description: 'The modern, high-performance AI chat UI based on Next.js.',
 };
 
 export const viewport = {

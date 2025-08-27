@@ -50,7 +50,17 @@ About the origin of user's request:
 - country: ${requestHints.country}
 `;
 
-export const systemPrompt = ({
+import { db } from '../db/queries';
+import { models as modelsTable } from '../db/schema';
+import { eq } from 'drizzle-orm';
+
+/**
+* Get systemPrompt
+* 1. User customization first
+* 2. Database model default_prompt second
+* 3. None of them returns an empty string
+*/
+export const systemPrompt = async ({
   customSystemPrompt,
   selectedChatModel,
   requestHints,
@@ -58,15 +68,18 @@ export const systemPrompt = ({
   customSystemPrompt: string;
   selectedChatModel: string;
   requestHints: RequestHints;
-}) => {
-  const requestPrompt = getRequestPromptFromHints(requestHints);
-
-  if (customSystemPrompt !== '') {
-    //console.debug('[DEBUG] SystemPrompt:', customSystemPrompt);
+}): Promise<string> => {
+  if (customSystemPrompt && customSystemPrompt.trim() !== '') {
     return customSystemPrompt;
   }
-
-    return `${regularPrompt}\n\n${requestPrompt}\n\n${artifactsPrompt}`;
+  const result = await db.select({ default_prompt: modelsTable.default_prompt })
+    .from(modelsTable)
+    .where(eq(modelsTable.id, selectedChatModel));
+  const dbPrompt = result[0]?.default_prompt?.trim();
+  if (dbPrompt) {
+    return dbPrompt;
+  }
+  return '';
 };
 
 export const codePrompt = `
