@@ -291,6 +291,10 @@
         "placeholder": "发送一条消息..."
       },
       "waiting": "请等待模型完成响应!"
+    },
+    "model-selector": {
+      "loading": "加载模型中...",
+      "no_models": "没有可用模型"
     }
   },
   "button": {

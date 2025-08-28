@@ -1,5 +1,5 @@
 import { smoothStream, streamText } from 'ai';
-import { myProvider } from '@/lib/ai/providers';
+import { getDynamicProvider } from '@/lib/ai/providers';
 import { createDocumentHandler } from '@/lib/artifacts/server';
 import { updateDocumentPrompt } from '@/lib/ai/prompts';
 
@@ -7,6 +7,7 @@ export const textDocumentHandler = createDocumentHandler<'text'>({
   kind: 'text',
   onCreateDocument: async ({ title, dataStream }) => {
     let draftContent = '';
+    const myProvider = await getDynamicProvider();
 
     const { fullStream } = streamText({
       model: myProvider.languageModel('artifact-model'),
@@ -36,6 +37,7 @@ export const textDocumentHandler = createDocumentHandler<'text'>({
   },
   onUpdateDocument: async ({ document, description, dataStream }) => {
     let draftContent = '';
+    const myProvider = await getDynamicProvider();
 
     const { fullStream } = streamText({
       model: myProvider.languageModel('artifact-model'),

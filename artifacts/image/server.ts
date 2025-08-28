@@ -1,10 +1,11 @@
-import { myProvider } from '@/lib/ai/providers';
+import { getDynamicProvider } from '@/lib/ai/providers';
 import { createDocumentHandler } from '@/lib/artifacts/server';
 import { experimental_generateImage } from 'ai';
 
 export const imageDocumentHandler = createDocumentHandler<'image'>({
   kind: 'image',
   onCreateDocument: async ({ title, dataStream }) => {
+    const myProvider = await getDynamicProvider();
     let draftContent = '';
 
     const { image } = await experimental_generateImage({
@@ -25,6 +26,7 @@ export const imageDocumentHandler = createDocumentHandler<'image'>({
   },
   onUpdateDocument: async ({ description, dataStream }) => {
     let draftContent = '';
+    const myProvider = await getDynamicProvider();
 
     const { image } = await experimental_generateImage({
       model: myProvider.imageModel('small-model'),

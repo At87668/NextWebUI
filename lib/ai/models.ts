@@ -1,9 +1,6 @@
 import { db } from '../db/queries';
 import { models as modelsTable } from '../db/schema';
 
-export const DEFAULT_CHAT_MODEL: string = 'model1';
-export const DEFAULT_CHAT_MODEL_GUEST: string = 'model1';
-
 export interface ChatModel {
   id: string;
   name: string;

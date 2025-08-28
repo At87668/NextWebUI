@@ -291,6 +291,10 @@
         "placeholder": "Send a message..."
       },
       "waiting": "Please wait for the model to finish responding!"
+    },
+    "model-selector": {
+      "loading": "Loading models...",
+      "no_models": "No models available."
     }
   },
   "button": {

@@ -4,7 +4,7 @@ import { streamObject, tool, type UIMessageStreamWriter } from 'ai';
 import { getDocumentById, saveSuggestions } from '@/lib/db/queries';
 import type { Suggestion } from '@/lib/db/schema';
 import { generateUUID } from '@/lib/utils';
-import { myProvider } from '../providers';
+import { getDynamicProvider } from '../providers';
 import type { ChatMessage } from '@/lib/types';
 
 interface RequestSuggestionsProps {
@@ -36,6 +36,7 @@ export const requestSuggestions = ({
         Omit<Suggestion, 'userId' | 'createdAt' | 'documentCreatedAt'>
       > = [];
 
+      const myProvider = await getDynamicProvider();
       const { elementStream } = streamObject({
         model: myProvider.languageModel('artifact-model'),
         system:

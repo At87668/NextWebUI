@@ -1,4 +1,4 @@
-import { myProvider } from '@/lib/ai/providers';
+import { getDynamicProvider } from '@/lib/ai/providers';
 import { sheetPrompt, updateDocumentPrompt } from '@/lib/ai/prompts';
 import { createDocumentHandler } from '@/lib/artifacts/server';
 import { streamObject } from 'ai';
@@ -8,6 +8,7 @@ export const sheetDocumentHandler = createDocumentHandler<'sheet'>({
   kind: 'sheet',
   onCreateDocument: async ({ title, dataStream }) => {
     let draftContent = '';
+    const myProvider = await getDynamicProvider();
 
     const { fullStream } = streamObject({
       model: myProvider.languageModel('artifact-model'),
@@ -47,6 +48,7 @@ export const sheetDocumentHandler = createDocumentHandler<'sheet'>({
   },
   onUpdateDocument: async ({ document, description, dataStream }) => {
     let draftContent = '';
+    const myProvider = await getDynamicProvider();
 
     const { fullStream } = streamObject({
       model: myProvider.languageModel('artifact-model'),

@@ -38,7 +38,7 @@ export async function middleware(request: NextRequest) {
 
     const isGuest = guestRegex.test(token?.email ?? '');
 
-    if (token && !isGuest && ['/login', '/register', '/forgetpass'].includes(pathname)) {
+    if (token && !isGuest && ['/login', '/register'].includes(pathname)) {
         return NextResponse.rewrite(new URL('/auth-refresh.html', request.url));
     }
 
