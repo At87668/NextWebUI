@@ -63,7 +63,6 @@ function PureChatHeader({
 
       {!isReadonly && (
         <ModelSelector
-          session={session}
           selectedModelId={selectedModelId}
           className="order-1 md:order-2"
         />
@@ -81,5 +80,11 @@ function PureChatHeader({
 }
 
 export const ChatHeader = memo(PureChatHeader, (prevProps, nextProps) => {
-  return prevProps.selectedModelId === nextProps.selectedModelId;
+  return (
+    prevProps.selectedModelId === nextProps.selectedModelId &&
+    prevProps.selectedVisibilityType === nextProps.selectedVisibilityType &&
+    prevProps.isReadonly === nextProps.isReadonly &&
+    prevProps.session?.user?.id === nextProps.session?.user?.id &&
+    prevProps.chatId === nextProps.chatId
+  );
 });

@@ -8,6 +8,13 @@
       "when": 1756291523186,
       "tag": "0000_flat_donald_blake",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1756380543219,
+      "tag": "0001_gifted_bishop",
+      "breakpoints": true
     }
   ]
 }
