@@ -1,78 +1,87 @@
 import { cookies } from 'next/headers';
-import { notFound, redirect } from 'next/navigation';
-
-import { auth } from '@/app/(auth)/auth';
 import { Chat } from '@/components/chat';
-import { getChatById, getMessagesByChatId } from '@/lib/db/queries';
+import { generateUUID } from '@/lib/utils';
 import { DataStreamHandler } from '@/components/data-stream-handler';
-import { DEFAULT_CHAT_MODEL, DEFAULT_CHAT_MODEL_GUEST } from '@/lib/ai/models';
-import { convertToUIMessages } from '@/lib/utils';
+import { auth } from '@/app/(auth)/auth';
+import { redirect } from 'next/navigation';
+import { getChatModelsFromDB } from '@/lib/ai/models';
+import { eq } from 'drizzle-orm';
+import { db } from '@/lib/db/queries';
+import { group } from '@/lib/db/schema';
 
-export default async function Page(props: { params: Promise<{ id: string }> }) {
-  const params = await props.params;
-  const { id } = params;
-  const chat = await getChatById({ id });
+async function getDefaultModelForUser(userType: string): Promise<string> {
+  try {
+    const result = await db
+      .select({
+        defaultModelId: group.default_model
+      })
+      .from(group)
+      .where(eq(group.group, userType))
+      .limit(1);
+    
+    if (result.length > 0 && result[0].defaultModelId) {
 
-  if (!chat) {
-    notFound();
+      const allModels = await getChatModelsFromDB();
+      const isValidDefault = allModels.some(model => model.id === result[0].defaultModelId);
+      
+      if (isValidDefault) {
+        return result[0].defaultModelId;
+      }
+      
+      console.warn(`Default model "${result[0].defaultModelId}" not found for user type "${userType}". Using first available model.`);
+    }
+    
+    const allModels = await getChatModelsFromDB();
+    if (allModels.length > 0) {
+      return allModels[0].id;
+    }
+    
+    console.error('No models available in the database!');
+    return '';
+  } catch (error) {
+    console.error('Error getting default model:', error);
+    return '';
   }
+}
 
+export default async function Page() {
   const session = await auth();
 
   if (!session || !session.user) {
     redirect('/login');
   }
 
-  if (chat.visibility === 'private') {
-    if (!session.user) {
-      return notFound();
-    }
-
-    if (session.user.id !== chat.userId) {
-      return notFound();
-    }
-  }
-
-  const messagesFromDb = await getMessagesByChatId({
-    id,
-  });
-
-  const uiMessages = convertToUIMessages(messagesFromDb);
+  const id = generateUUID();
 
   const cookieStore = await cookies();
-  const chatModelFromCookie = cookieStore.get('chat-model');
+  const modelIdFromCookie = cookieStore.get('chat-model');
 
-  if (!chatModelFromCookie) {
-    return (
-      <>
-        <Chat
-          id={chat.id}
-          initialMessages={uiMessages}
-          initialChatModel={
-            session.user.type === 'guest'
-              ? DEFAULT_CHAT_MODEL_GUEST
-              : DEFAULT_CHAT_MODEL
-          }
-          initialVisibilityType={chat.visibility}
-          isReadonly={session?.user?.id !== chat.userId}
-          session={session}
-          autoResume={true}
-        />
-        <DataStreamHandler />
-      </>
-    );
+  let initialChatModel: string;
+  
+  if (modelIdFromCookie) {
+    const allModels = await getChatModelsFromDB();
+    const isValidModel = allModels.some(model => model.id === modelIdFromCookie.value);
+    
+    if (isValidModel) {
+      initialChatModel = modelIdFromCookie.value;
+    } else {
+      initialChatModel = await getDefaultModelForUser(session.user.type);
+    }
+  } else {
+    initialChatModel = await getDefaultModelForUser(session.user.type);
   }
 
   return (
     <>
       <Chat
-        id={chat.id}
-        initialMessages={uiMessages}
-        initialChatModel={chatModelFromCookie.value}
-        initialVisibilityType={chat.visibility}
-        isReadonly={session?.user?.id !== chat.userId}
+        key={id}
+        id={id}
+        initialMessages={[]}
+        initialChatModel={initialChatModel}
+        initialVisibilityType="private"
+        isReadonly={false}
         session={session}
-        autoResume={true}
+        autoResume={false}
       />
       <DataStreamHandler />
     </>

@@ -1,6 +1,5 @@
 import { db } from '../db/queries';
 import { models as modelsTable } from '../db/schema';
-
 export interface ChatModel {
   id: string;
   name: string;

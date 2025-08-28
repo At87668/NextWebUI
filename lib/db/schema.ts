@@ -22,12 +22,11 @@ export const user = pgTable('User', {
 
 export const group = pgTable('Group', {
   group: varchar('group', { length: 50 }).notNull().primaryKey(),
-
   models: varchar('models', { length: 255 })
     .array()
     .notNull(),
-  
-  max_message_per_day: integer('max_message_per_day')
+  max_message_per_day: integer('max_message_per_day'),
+  default_model: text('default_model').notNull(),
 });
 
 export const models = pgTable('Models', {
