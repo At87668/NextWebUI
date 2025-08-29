@@ -17,7 +17,7 @@ NextWebUI 是一个基于 Next.js 构建的现代、高性能 AI 聊天用户界
   - 允许服务端作废用户Token，增强账户安全。
 - 现代化UI:
   - 界面美观，提供高性能的用户体验。
-  - 基于 [Next.js ](https://nextjs.org/)App Router 构建，利用 React Server Components (RSCs) 和 Server Actions 实现服务端渲染和高性能。
+  - 基于 [Next.js](https://nextjs.org/) App Router 构建，利用 React Server Components (RSCs) 和 Server Actions 实现服务端渲染和高性能。
 - 全面的用户设置:
   - 支持用户自定义提示词。
   - 提供多种主题选项。
@@ -29,7 +29,7 @@ NextWebUI 是一个基于 Next.js 构建的现代、高性能 AI 聊天用户界
   - 使用 [Postgres](https://vercel.com/marketplace/neon) 保存聊天历史和用户数据。
   - 使用 [Vercel Blob](https://vercel.com/storage/blob) 进行高效的对话文件存储。
 - 身份认证
-  - 使用 [Auth.js ](https://authjs.dev/)及 Redis 提供安全的认证。
+  - 使用 [Auth.js](https://authjs.dev/) 及 Redis 提供安全的认证。
 
 ## 模型提供商
 
@@ -45,7 +45,7 @@ NextWebUI 是一个基于 Next.js 构建的现代、高性能 AI 聊天用户界
 
 ## 本地运行
 
-你需要使用 [.env.example 文件中定义的环境变量](https://chat.qwen.ai/c/.env.example) 来运行 NextWebUI。建议你使用 [Vercel 环境变量](https://vercel.com/docs/projects/environment-variables)，但创建一个 `.env` 文件也足够了。
+你需要在 [.env.example]((./.env.example)) 文件中定义环境变量来运行 NextWebUI。建议你使用 [Vercel 环境变量](https://vercel.com/docs/projects/environment-variables)，但创建一个 `.env` 文件也足够了。
 
 > **注意**: 请勿提交你的 `.env` 文件，否则会暴露你的密钥，导致他人可以访问你的AI和认证服务账户。 
 

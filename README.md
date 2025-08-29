@@ -45,7 +45,7 @@ You can deploy NextWebUI to Vercel with one click:
 
 ## Run Locally
 
-You need to run NextWebUI using the environment variables defined in the [.env.example file](https://chat.qwen.ai/c/.env.example). We recommend using [Vercel environment variables](https://vercel.com/docs/projects/environment-variables), but creating a `.env` file is also sufficient.
+You need to run NextWebUI using the environment variables defined in the [.env.example](./.env.example) file. We recommend using [Vercel environment variables](https://vercel.com/docs/projects/environment-variables), but creating a `.env` file is also sufficient.
 
 > **Note**: Never commit your `.env` file, as it may expose your secrets and allow others to access your AI and authentication service accounts. 
 
@@ -57,4 +57,4 @@ You need to run NextWebUI using the environment variables defined in the [.env.e
 
 > pnpm dev
 
-Your NextWebUI application should now be running at [localhost:3001 ](http://localhost:3001/).
+Your NextWebUI application should now be running at [localhost:3001](http://localhost:3001/).
