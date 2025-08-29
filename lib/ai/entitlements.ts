@@ -20,27 +20,34 @@ export async function getEntitlementsByUserType(userType: UserType): Promise<Ent
     .limit(1);
 
   if (result.length === 0) {
+    if (userType === 'admin') {
+      console.info('No DB config found for admin, using default entitlements: unlimited messages and all models access.');
+      return {
+        maxMessagesPerDay: null,
+        availableChatModelIds: [],
+      };
+    }
+
     console.error(`User group configuration not found for: ${userType}`);
     return null;
   }
 
   const { models, maxMessagePerDay } = result[0];
 
-  // Handle chat models
-  const availableChatModelIds = Array.isArray(models) ? models : [];
+  const availableChatModelIds = userType === 'admin'
+    ? []
+    : (Array.isArray(models) ? models : []);
 
-  if (!availableChatModelIds.length) {
+  if (!availableChatModelIds.length && userType !== 'admin') {
     console.warn(`No available models configured for user group ${userType}.`);
   }
 
-  // admin has no message limit
-  let maxMessagesPerDay: number | null = null; // null = unlimited
+  let maxMessagesPerDay: number | null = null;
 
   if (userType === 'admin') {
-    console.info('Admin user detected: granting unlimited messages.');
+    console.info('Admin user detected: granting unlimited messages and full model access.');
   } else {
-    // For non-admins, use DB value or fallback to 100
-    if (maxMessagePerDay && typeof maxMessagePerDay === 'number' && maxMessagePerDay > 0) {
+    if (typeof maxMessagePerDay === 'number' && maxMessagePerDay > 0) {
       maxMessagesPerDay = maxMessagePerDay;
     } else {
       console.warn(
