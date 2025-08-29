@@ -4,6 +4,8 @@ NextWebUI 是一个基于 Next.js 构建的现代、高性能 AI 聊天用户界
 
 <p align="center"> <a href="#功能"><strong>功能</strong></a> · <a href="#模型提供商"><strong>模型提供商</strong></a> · <a href="#部署你自己的实例"><strong>部署你自己的实例</strong></a> · <a href="#本地运行"><strong>本地运行</strong></a> </p>  <br/>
 
+简体中文 | [English](./README.md)
+
 ## 功能
 
 - **开箱即用**: 像 OpenWebUI 一样，简单配置后即可使用。

@@ -4,6 +4,8 @@ NextWebUI is a modern, high-performance AI chat user interface built with Next.j
 
 <p align="center"> <a href="#features"><strong>Features</strong></a> · <a href="#model-providers"><strong>Model Providers</strong></a> · <a href="#deploy-your-own-instance"><strong>Deploy Your Own Instance</strong></a> · <a href="#run-locally"><strong>Run Locally</strong></a> </p> <br/>
 
+[简体中文](./README_zh.md) | English
+
 ## Features
 
 - **Ready to use out of the box**: Like OpenWebUI, it works right after simple configuration.
