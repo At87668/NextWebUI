@@ -37,9 +37,12 @@ export function AppSidebar({ user }: { user: User | undefined }) {
               }}
               className="flex flex-row gap-3 items-center"
             >
-              <span className="text-lg font-semibold px-2 hover:bg-muted rounded-md cursor-pointer">
-                NextWebUI
-              </span>
+              <span className="text-sm font-semibold px-2 hover:bg-muted rounded-md cursor-pointer">
+              <object data="/next.svg" type="image/svg+xml" height="18" width="79">
+                  NEXT
+              </object>
+                  &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;WebUI
+                </span>
             </Link>
             <Tooltip>
               <TooltipTrigger asChild>
