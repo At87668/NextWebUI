@@ -5,7 +5,7 @@ import type { UserType } from '@/app/(auth)/auth';
 import type { ChatModel } from './models';
 
 interface Entitlements {
-  maxMessagesPerDay: number;
+  maxMessagesPerDay: number | null; // `null` means unlimited
   availableChatModelIds: Array<ChatModel['id']>;
 }
 
@@ -25,23 +25,33 @@ export async function getEntitlementsByUserType(userType: UserType): Promise<Ent
   }
 
   const { models, maxMessagePerDay } = result[0];
-  
-  if (maxMessagePerDay === null || maxMessagePerDay <= 0) {
-    console.warn(
-      `Invalid max_message_per_day value for user group ${userType}: ${maxMessagePerDay}. Using default 100.`
-    );
-  }
-  
-  const maxMessages = maxMessagePerDay && maxMessagePerDay > 0 
-    ? maxMessagePerDay 
-    : 100;
 
-  if (!Array.isArray(models) || models.length === 0) {
+  // Handle chat models
+  const availableChatModelIds = Array.isArray(models) ? models : [];
+
+  if (!availableChatModelIds.length) {
     console.warn(`No available models configured for user group ${userType}.`);
   }
 
+  // admin has no message limit
+  let maxMessagesPerDay: number | null = null; // null = unlimited
+
+  if (userType === 'admin') {
+    console.info('Admin user detected: granting unlimited messages.');
+  } else {
+    // For non-admins, use DB value or fallback to 100
+    if (maxMessagePerDay && typeof maxMessagePerDay === 'number' && maxMessagePerDay > 0) {
+      maxMessagesPerDay = maxMessagePerDay;
+    } else {
+      console.warn(
+        `Invalid or missing max_message_per_day for ${userType}: ${maxMessagePerDay}. Using default 100.`
+      );
+      maxMessagesPerDay = 100;
+    }
+  }
+
   return {
-    maxMessagesPerDay: maxMessages,
-    availableChatModelIds: Array.isArray(models) ? models : [],
+    maxMessagesPerDay,
+    availableChatModelIds,
   };
 }

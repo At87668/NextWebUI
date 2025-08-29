@@ -7,7 +7,7 @@ import { DUMMY_PASSWORD } from '@/lib/constants';
 import type { DefaultJWT } from 'next-auth/jwt';
 import redis from '@/lib/redis/redis';
 
-export type UserType = 'guest' | 'regular';
+export type UserType = 'guest' | 'regular' | 'admin';
 
 declare module 'next-auth' {
   interface Session extends DefaultSession {
@@ -70,7 +70,10 @@ export const {
           id: user.id,
           email: user.email,
           nick: user.nick,
-          type: 'regular' as UserType,
+          type:
+            user.email === process.env.ADMIN_EMAIL
+              ? 'admin'
+              : 'regular' as UserType,
         };
       },
     }),
