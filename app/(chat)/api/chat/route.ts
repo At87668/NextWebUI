@@ -153,7 +153,7 @@ export async function POST(request: Request) {
     });
 
     const entitlements = await getEntitlementsByUserType(userType);
-    if (entitlements && messageCount > entitlements.maxMessagesPerDay) {
+    if (entitlements?.maxMessagesPerDay && messageCount > entitlements.maxMessagesPerDay) {
       return new ChatSDKError('rate_limit:chat').toResponse();
     }
 
