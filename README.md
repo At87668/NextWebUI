@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <h1 align="center">NextWebUI</h1>
 
 NextWebUI is a modern, high-performance AI chat user interface built with Next.js.
