@@ -26,14 +26,14 @@ NextWebUI is a modern, high-performance AI chat user interface built with Next.j
   - Built-in English and Chinese translations.
   - Designed for easy extensibility, allowing additional languages to be added effortlessly as needed.
 - Data Persistence:
-  - Uses [Postgres](https://vercel.com/marketplace/neon) to store chat history and user data.
+  - Uses [PostgresSQL](https://www.postgresql.org/) to store chat history and user data.
   - Uses [Vercel Blob](https://vercel.com/storage/blob) for efficient file storage in conversations.
 - Authentication:
-  - Provides secure authentication via [Auth.js](https://authjs.dev/) and Redis.
+  - Provides secure authentication via [Auth.js](https://authjs.dev/) and [Redis](https://redis.io/).
 
 ## Model Providers
 
-This project uses the [AI SDK](https://sdk.vercel.ai/docs) and natively supports OpenAI and Ollama by default. You can easily extend support with just a few lines of code.
+This project is extended from [Chat SDK](https://chat-sdk.dev/) and uses the [AI SDK](https://sdk.vercel.ai/docs) for model interaction, and supports OpenAI and Ollama by default. You can easily scale with just a few lines of code.
 
 ## Deploy Your Own Instance
 
@@ -54,7 +54,18 @@ You need to run NextWebUI using the environment variables defined in the [.env.e
 3. Download your environment variables: `vercel env pull`
 
 > pnpm install
-
+>
 > pnpm dev
 
 Your NextWebUI application should now be running at [localhost:3001](http://localhost:3001/).
+
+## Acknowledgement
+- **Vercel**: Many thanks to Vercel for creating ChatSDK, which greatly reduced development effort for NextWebUI.
+- **All Contributors**: Thank you to all contributors who have helped improve NextWebUI—your efforts are greatly appreciated.
+
+## *Support the Developer*
+*If you are a user from China, consider "charging" the developer via [bilibili](https://space.bilibili.com/1098279072) .*
+
+*Alternatively, a free GitHub Star would mean a lot!*
+
+*Thank you so much!*

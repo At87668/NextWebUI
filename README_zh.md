@@ -26,14 +26,14 @@ NextWebUI 是一个基于 Next.js 构建的现代、高性能 AI 聊天用户界
   - 内置英文和中文翻译。
   - 设计上易于扩展，可根据需求轻松添加更多语言。
 - 数据持久化
-  - 使用 [Postgres](https://vercel.com/marketplace/neon) 保存聊天历史和用户数据。
+  - 使用 [PostgresSQL](https://www.postgresql.org/) 保存聊天历史和用户数据。
   - 使用 [Vercel Blob](https://vercel.com/storage/blob) 进行高效的对话文件存储。
 - 身份认证
-  - 使用 [Auth.js](https://authjs.dev/) 及 Redis 提供安全的认证。
+  - 使用 [Auth.js](https://authjs.dev/) 及 [Redis](https://redis.io/) 提供安全的认证。
 
 ## 模型提供商
 
-本项目使用 [AI SDK](https://sdk.vercel.ai/docs)，默认支持 OpenAI与Ollama。您只需几行代码即可轻松扩展。
+本项目基于 [Chat SDK](https://chat-sdk.dev/) 进行扩展, 使用 [AI SDK](https://sdk.vercel.ai/docs)进行模型交互，默认支持 OpenAI 与 Ollama 。您只需几行代码即可轻松扩展。
 
 ## 部署你自己的实例
 
@@ -56,7 +56,18 @@ NextWebUI 是一个基于 Next.js 构建的现代、高性能 AI 聊天用户界
 
 
 > pnpm install
-
+>
 > pnpm dev
 
 你的 NextWebUI 应用现在应该在 [localhost:3001](http://localhost:3001/) 上运行。
+
+## 鸣谢
+- **Vercel**: 非常感谢Vercel创建了ChatSDK, 这为NextWebUI的开发节省了很多工作量.
+- **所有贡献者**: 感谢为NextWebUI做出编辑的所有贡献者, 你们为NextWebUI的发展添砖加瓦.
+
+## *支持开发者*
+*如果您是中国用户, 可以考虑为开发者在[bilibili](https://space.bilibili.com/1098279072)进行充电*
+
+*或者, 您也可以点一个免费的Star!*
+
+*万分感谢!*
