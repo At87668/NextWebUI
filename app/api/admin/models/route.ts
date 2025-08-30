@@ -87,6 +87,7 @@ export async function POST(req: NextRequest) {
 
         return NextResponse.json(model);
     } catch (error) {
+        console.error('Model insert error:', error);
         return NextResponse.json({ error: 'errors.database_query_error' }, { status: 500 });
     }
 }

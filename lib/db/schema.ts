@@ -30,7 +30,7 @@ export const group = pgTable('Group', {
 });
 
 export const models = pgTable('Models', {
-  id: text('id').notNull(),
+  id: text('id').notNull().primaryKey(),
   name: text('name').notNull(),
   model_description: text('description'),
   default_prompt: text('default_prompt'),
