@@ -6,8 +6,10 @@ import { eq } from 'drizzle-orm';
 import { ChatSDKError } from '@/lib/errors';
 import redis from '@/lib/redis/redis';
 
-export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
-  const session = await auth();
+export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
+
+    const session = await auth();
     if (!session?.user || session.user.type !== 'admin') {
         return new NextResponse('Unauthorized', { status: 401 });
     }
@@ -22,33 +24,33 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
         return new Response('Session revoked', { status: 419 });
     }
 
-  const body = await req.json();
-  const updates = {
-    name: body.name,
-    model_description: body.description,
-    default_prompt: body.default_prompt,
-    max_token: body.max_token || null,
-    type: body.type,
-    api_base_url: body.api_base_url || null,
-    api_key: body.type === 'ollama' ? null : (body.api_key || null),
-  };
+    const body = await req.json();
+    const updates = {
+        name: body.name,
+        model_description: body.description,
+        default_prompt: body.default_prompt,
+        max_token: body.max_token || null,
+        type: body.type,
+        api_base_url: body.api_base_url || null,
+        api_key: body.type === 'ollama' ? null : (body.api_key || null),
+    };
 
-  try {
-    const [updated] = await db
-      .update(models)
-      .set(updates)
-      .where(eq(models.id, params.id))
-      .returning();
+    try {
+        const [updated] = await db
+            .update(models)
+            .set(updates)
+            .where(eq(models.id, id))
+            .returning();
 
-    if (!updated) return NextResponse.json({ error: 'admin.models.not_found' }, { status: 404 });
-    return NextResponse.json(updated);
-  } catch (error) {
-    return NextResponse.json({ error: 'admin.models.update.fail' }, { status: 500 });
-  }
+        if (!updated) return NextResponse.json({ error: 'admin.models.not_found' }, { status: 404 });
+        return NextResponse.json(updated);
+    } catch (error) {
+        return NextResponse.json({ error: 'admin.models.update.fail' }, { status: 500 });
+    }
 }
 
 export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
-  const session = await auth();
+    const session = await auth();
     if (!session?.user || session.user.type !== 'admin') {
         return new NextResponse('Unauthorized', { status: 401 });
     }
@@ -63,13 +65,13 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
         return new Response('Session revoked', { status: 419 });
     }
 
-  try {
-    const result = await db.delete(models).where(eq(models.id, params.id)).returning();
-    if (result.length === 0) {
-      return NextResponse.json({ error: 'admin.models.not_found' }, { status: 404 });
+    try {
+        const result = await db.delete(models).where(eq(models.id, params.id)).returning();
+        if (result.length === 0) {
+            return NextResponse.json({ error: 'admin.models.not_found' }, { status: 404 });
+        }
+        return new NextResponse(null, { status: 204 });
+    } catch (error) {
+        return NextResponse.json({ error: 'admin.models.delete.fail' }, { status: 500 });
     }
-    return new NextResponse(null, { status: 204 });
-  } catch (error) {
-    return NextResponse.json({ error: 'admin.models.delete.fail' }, { status: 500 });
-  }
 }
