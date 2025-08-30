@@ -113,13 +113,10 @@ const initDefaultModels = async () => {
 
     if (modelsToInsert.length === 0) {
       console.log('✅ All default models already exist and do not need to be initialized');
-      process.exit(0);
     }
 
     await db.insert(schema.models).values(modelsToInsert);
     console.log(`✅ Successfully create model: ${modelsToInsert.map(m => m.id).join(', ')}`);
-
-    process.exit(0);
   } catch (error) {
     console.error('❌ Initializing the default model failed:', error);
     process.exit(1);
@@ -147,23 +144,22 @@ const initDefaultGroups = async () => {
 
   if (groupsToInsert.length === 0) {
     console.log('✅ All default user groups already exist and do not need to be initialized.');
-    process.exit(0);
   }
 
   await db.insert(schema.group).values(groupsToInsert);
   console.log(`✅ Successfully create a user group: ${groupsToInsert.map(g => g.group).join(', ')}`);
-
-  process.exit(0);
 };
 
-initDefaultGroups().catch((err) => {
+await initDefaultGroups().catch((err) => {
   console.error('❌ Group init failed');
   console.error(err);
   process.exit(1);
 });
 
-initDefaultModels().catch((err) => {
+await initDefaultModels().catch((err) => {
   console.error('❌ Models init failed');
   console.error(err);
   process.exit(1);
 });
+
+process.exit(0);
