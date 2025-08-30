@@ -1,7 +1,7 @@
 import { config } from 'dotenv';
 import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
-import * as schema from './schema';
+import { group, models } from '@/lib/db/schema';
 
 config({
   path: '.env.local',
@@ -23,10 +23,10 @@ const defaultGroups = [
 ];
 
 export const titlePrompt = `
-    - you will generate a short title based on the first message a user begins a conversation with
-    - ensure it is not more than 80 characters long
-    - the title should be a summary of the user's message
-    - do not use quotes or colons`
+- you will generate a short title based on the first message a user begins a conversation with
+- ensure it is not more than 80 characters long
+- the title should be a summary of the user's message
+- do not use quotes or colons`;
 
 export const artifactsPrompt = `
 Artifacts is a special user interface mode that helps users with writing, editing, and other content creation tasks. When artifact is open, it is on the right side of the screen, while the conversation is on the left side. When creating or updating documents, changes are reflected in real-time on the artifacts and visible to the user.
@@ -91,7 +91,7 @@ const defaultModels: Array<{
   },
 ];
 
-const initDefaultModels = async () => {
+const initDefault = async () => {
   const connectionString = process.env.POSTGRES_URL;
   if (!connectionString) {
     console.error('❌ POSTGRES_URL is not defined');
@@ -99,67 +99,44 @@ const initDefaultModels = async () => {
   }
 
   const client = postgres(connectionString, { max: 1 });
-  const db = drizzle(client, { schema });
-
-  console.log('🔍 Check if the default model exists...');
+  const db = drizzle(client, { schema: { group, models } });
 
   try {
-    const existingModels = await db.query.models.findMany({
-      columns: { id: true },
-    });
-    const existingIds = new Set(existingModels.map(m => m.id));
+    console.log('🔍 Checking if default user groups exist...');
+    const existingGroups = await db.query.group.findMany({ columns: { group: true } });
+    const existingNames = new Set(existingGroups.map(g => g.group));
+    const groupsToInsert = defaultGroups.filter(g => !existingNames.has(g.group));
 
-    const modelsToInsert = defaultModels.filter(m => !existingIds.has(m.id));
-
-    if (modelsToInsert.length === 0) {
-      console.log('✅ All default models already exist and do not need to be initialized');
+    if (groupsToInsert.length > 0) {
+      await db.insert(group).values(groupsToInsert);
+      console.log(`✅ Created user groups: ${groupsToInsert.map(g => g.group).join(', ')}`);
+    } else {
+      console.log('✅ All default user groups already exist, skipping.');
     }
 
-    await db.insert(schema.models).values(modelsToInsert);
-    console.log(`✅ Successfully create model: ${modelsToInsert.map(m => m.id).join(', ')}`);
+    console.log('🔍 Checking if default models exist...');
+    const existingModels = await db.query.models.findMany({ columns: { id: true } });
+    const existingIds = new Set(existingModels.map(m => m.id));
+    const modelsToInsert = defaultModels.filter(m => !existingIds.has(m.id));
+
+    if (modelsToInsert.length > 0) {
+      await db.insert(models).values(modelsToInsert);
+      console.log(`✅ Created models: ${modelsToInsert.map(m => m.id).join(', ')}`);
+    } else {
+      console.log('✅ All default models already exist, skipping.');
+    }
   } catch (error) {
-    console.error('❌ Initializing the default model failed:', error);
+    console.error('❌ Initialization failed:', error);
     process.exit(1);
+  } finally {
+    await client.end();
   }
 };
 
-const initDefaultGroups = async () => {
-  const connectionString = process.env.POSTGRES_URL;
-  if (!connectionString) {
-    console.error('❌ POSTGRES_URL is not defined');
-    process.exit(1);
-  }
-
-  const client = postgres(connectionString);
-  const db = drizzle(client, { schema });
-
-  console.log('🔍 Check if the default user group exists...');
-
-  const existingGroups = await db.query.group.findMany({
-    columns: { group: true },
-  });
-  const existingNames = new Set(existingGroups.map(g => g.group));
-
-  const groupsToInsert = defaultGroups.filter(g => !existingNames.has(g.group));
-
-  if (groupsToInsert.length === 0) {
-    console.log('✅ All default user groups already exist and do not need to be initialized.');
-  }
-
-  await db.insert(schema.group).values(groupsToInsert);
-  console.log(`✅ Successfully create a user group: ${groupsToInsert.map(g => g.group).join(', ')}`);
-};
-
-await initDefaultGroups().catch((err) => {
-  console.error('❌ Group init failed');
+try {
+  initDefault();
+} catch (err) {
+  console.error('❌ Init failed');
   console.error(err);
   process.exit(1);
-});
-
-await initDefaultModels().catch((err) => {
-  console.error('❌ Models init failed');
-  console.error(err);
-  process.exit(1);
-});
-
-process.exit(0);
+}
