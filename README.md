@@ -39,7 +39,7 @@ This project is extended from [Chat SDK](https://chat-sdk.dev/) and uses the [AI
 
 You can deploy NextWebUI to Vercel with one click:
 
-[![Deploy with Vercel](https://vercel.com/button?x-oss-process=image/resize,m_mfit,w_320,h_320&x-oss-process=image/resize,m_mfit,w_320,h_320)]()
+[![Deploy with Vercel](https://vercel.com/button?x-oss-process=image/resize,m_mfit,w_320,h_320)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FAt87668%2FNextWebUI&env=AUTH_SECRET,BLOB_READ_WRITE_TOKEN,POSTGRES_URL,REDIS_URL,ADMIN_EMAIL&envDescription=You%20need%20to%20fill%20in%20these%20environment%20variables%20for%20the%20program%20to%20work.&envLink=https%3A%2F%2Fgithub.com%2FAt87668%2FNextWebUI%2Fblob%2Fmain%2F.env.example&project-name=nextwebui&repository-name=nextwebui-cloned)
 
 (Still under development, not yet available)
 
