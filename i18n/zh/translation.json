@@ -430,5 +430,23 @@
   "admin_board": {},
   "admin_panel": {
     "button": "管理员面板"
+  },
+  "admin": {
+    "models": {
+      "missing_parameter": "ID 和名称必填",
+      "not_found": "模型不存在",
+      "delete": {
+        "fail": "删除失败"
+      },
+      "update": {
+        "fail": "更新失败"
+      }
+    },
+    "group": {
+      "not_found": "用户组不存在",
+      "update": {
+        "fail": "更新失败"
+      }
+    }
   }
 }

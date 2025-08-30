@@ -429,5 +429,23 @@
   "admin_board": {},
   "admin_panel": {
     "button": "Admin Panel"
+  },
+  "admin": {
+    "models": {
+      "missing_parameter": "ID and name required",
+      "not_found": "The model does not exist.",
+      "delete": {
+        "fail": "Delete failed."
+      },
+      "update": {
+        "fail": "Update failed."
+      }
+    },
+    "group": {
+      "not_found": "User groups do not exist.",
+      "update": {
+        "fail": "Update failed."
+      }
+    }
   }
 }
