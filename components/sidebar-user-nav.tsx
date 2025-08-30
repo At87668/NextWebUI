@@ -79,7 +79,7 @@ export function SidebarUserNav({ user }: { user: User }) {
           const session = await res.json();
           if (session?.systemPrompt) setSystemPrompt(session.systemPrompt);
         }
-      } catch {}
+      } catch { }
     }
     if (session?.user?.id) fetchSystemPrompt();
   }, [session?.user?.id]);
@@ -95,19 +95,20 @@ export function SidebarUserNav({ user }: { user: User }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ systemPrompt: prompt }),
       });
-    } catch {}
+    } catch { }
   }
   const isGuest = guestRegex.test(session?.user?.email ?? '');
+  const isAdmin = session?.user.type === "admin";
 
   const renderWithLineBreaks = (text: string) => {
-  return text.split('\n').map((line, index) => (
-    // biome-ignore lint/suspicious/noArrayIndexKey: Static content, index is safe here
-    <span key={index}>
-      {line}
-      {index < text.split('\n').length - 1 && <br />}
-    </span>
-  ));
-};
+    return text.split('\n').map((line, index) => (
+      // biome-ignore lint/suspicious/noArrayIndexKey: Static content, index is safe here
+      <span key={index}>
+        {line}
+        {index < text.split('\n').length - 1 && <br />}
+      </span>
+    ));
+  };
 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
@@ -163,24 +164,40 @@ export function SidebarUserNav({ user }: { user: User }) {
           </DropdownMenuTrigger>
 
           <DropdownMenuContent
-            session-testid="user-nav-menu"
+            data-testid="user-nav-menu"
             side="top"
             className="w-[--radix-popper-anchor-width]"
           >
-            <>
+            {/* 设置项与分割线 */}
+            <DropdownMenuItem
+              data-testid="user-nav-item-settings"
+              className="flex cursor-pointer gap-2"
+              onSelect={() => setSettingsOpen(true)}
+            >
+              <Settings className="h-4 w-4" />
+              <span>{t('settings.title')}</span>
+            </DropdownMenuItem>
+
+            <DropdownMenuSeparator />
+
+            {/* 管理员面板按钮 */}
+            {isAdmin && (
               <DropdownMenuItem
-                session-testid="user-nav-item-settings"
+                data-testid="user-nav-item-admin-board"
                 className="flex cursor-pointer gap-2"
-                onSelect={() => setSettingsOpen(true)}
+                onClick={() => {
+                  router.push('/admin');
+                }}
               >
-                <Settings className="h-4 w-4" />
-                <span>{t('settings.title')}</span>
+                <MonitorIcon className="h-4 w-4" />
+                <span>{t('admin_panel.button')}</span>
               </DropdownMenuItem>
+            )}
 
-              <DropdownMenuSeparator />
-            </>
+            <DropdownMenuSeparator />
 
-            <DropdownMenuItem asChild session-testid="user-nav-item-auth">
+            {/* 登录/登出按钮 */}
+            <DropdownMenuItem asChild data-testid="user-nav-item-auth">
               <button
                 type="button"
                 className="flex w-full cursor-pointer items-center gap-2"
@@ -281,11 +298,10 @@ export function SidebarUserNav({ user }: { user: User }) {
                         <button
                           key={tab.id}
                           type="button"
-                          className={`flex items-center gap-3 px-4 py-3 text-sm font-medium text-left hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors border-r-2 ${
-                            activeTab === tab.id
+                          className={`flex items-center gap-3 px-4 py-3 text-sm font-medium text-left hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors border-r-2 ${activeTab === tab.id
                               ? 'bg-zinc-200 dark:bg-zinc-700 border-blue-500 text-blue-600 dark:text-blue-400'
                               : 'border-transparent text-zinc-700 dark:text-zinc-300'
-                          }`}
+                            }`}
                           onClick={() =>
                             setActiveTab(
                               tab.id as 'interface' | 'chat' | 'user' | 'about',
@@ -352,18 +368,17 @@ export function SidebarUserNav({ user }: { user: User }) {
                           <button
                             key={tab.id}
                             type="button"
-                            className={`flex-1 flex items-center justify-center gap-2 px-3 py-3 text-xs sm:text-sm font-medium border-b-2 transition-colors ${
-                              activeTab === tab.id
+                            className={`flex-1 flex items-center justify-center gap-2 px-3 py-3 text-xs sm:text-sm font-medium border-b-2 transition-colors ${activeTab === tab.id
                                 ? 'border-blue-500 text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
                                 : 'border-transparent text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'
-                            }`}
+                              }`}
                             onClick={() =>
                               setActiveTab(
                                 tab.id as
-                                  | 'interface'
-                                  | 'chat'
-                                  | 'user'
-                                  | 'about',
+                                | 'interface'
+                                | 'chat'
+                                | 'user'
+                                | 'about',
                               )
                             }
                           >
@@ -423,9 +438,8 @@ export function SidebarUserNav({ user }: { user: User }) {
                                 ? '简体中文 (zh-CN)'
                                 : 'English (en-US)'}
                               <svg
-                                className={`w-4 h-4 transition-transform duration-200 ${
-                                  isLanguageOpen ? 'rotate-180' : ''
-                                }`}
+                                className={`w-4 h-4 transition-transform duration-200 ${isLanguageOpen ? 'rotate-180' : ''
+                                  }`}
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
@@ -510,11 +524,10 @@ export function SidebarUserNav({ user }: { user: User }) {
                                   key={item}
                                   type="button"
                                   className={`px-5 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 capitalize
-              ${
-                theme === item
-                  ? 'bg-blue-600 text-white shadow-md scale-105'
-                  : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700'
-              }
+              ${theme === item
+                                      ? 'bg-blue-600 text-white shadow-md scale-105'
+                                      : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700'
+                                    }
             `}
                                   onClick={() => setTheme(item)}
                                 >
@@ -889,11 +902,11 @@ export function SidebarUserNav({ user }: { user: User }) {
                               >
                                 {saving
                                   ? t(
-                                      'settings.tabs.user_.change_password.save.ing',
-                                    )
+                                    'settings.tabs.user_.change_password.save.ing',
+                                  )
                                   : t(
-                                      'settings.tabs.user_.change_password.title',
-                                    )}
+                                    'settings.tabs.user_.change_password.title',
+                                  )}
                               </button>
                             </form>
                           </div>

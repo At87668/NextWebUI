@@ -415,7 +415,8 @@
     },
     "offline": {
       "chat": "We are having trouble sending your message. Please check your internet connection and try again."
-    }
+    },
+    "no_permission": "Insufficient permissions."
   },
   "errosr": {
     "forbidden": {
@@ -424,5 +425,9 @@
   },
   "request": {
     "failed": "Request failed"
+  },
+  "admin_board": {},
+  "admin_panel": {
+    "button": "Admin Panel"
   }
 }

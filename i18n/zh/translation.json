@@ -416,7 +416,8 @@
     },
     "offline": {
       "chat": "我们在发送您的消息时遇到问题。请检查您的互联网连接并重试。"
-    }
+    },
+    "no_permission": "权限不足"
   },
   "errosr": {
     "forbidden": {
@@ -425,5 +426,9 @@
   },
   "request": {
     "failed": "请求失败"
+  },
+  "admin_board": {},
+  "admin_panel": {
+    "button": "管理员面板"
   }
 }

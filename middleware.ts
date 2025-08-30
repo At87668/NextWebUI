@@ -7,6 +7,11 @@ const AUTH_REQUIRED_PATHS = [
     '/api/auth/logout'
 ];
 
+const ADMIN_PATHS = [
+    '/api/admin',
+    '/admin'
+];
+
 export async function middleware(request: NextRequest) {
     const { pathname } = request.nextUrl;
 
@@ -37,6 +42,7 @@ export async function middleware(request: NextRequest) {
     }
 
     const isGuest = guestRegex.test(token?.email ?? '');
+    const isAdmin = token?.type === "admin";
 
     if (token && !isGuest && ['/login', '/register'].includes(pathname)) {
         return NextResponse.rewrite(new URL('/auth-refresh.html', request.url));
@@ -47,6 +53,14 @@ export async function middleware(request: NextRequest) {
     );
 
     if (isGuest && isProtectedPath) {
+        return new NextResponse('No access to the path.', { status: 403 });
+    }
+
+    const isAdminPath = ADMIN_PATHS.some(path =>
+        pathname === path || new RegExp(path.replace(':id', '[^/]+')).test(pathname)
+    );
+
+    if (!isAdmin && isAdminPath) {
         return new NextResponse('No access to the path.', { status: 403 });
     }
 
