@@ -45,6 +45,7 @@ export async function POST(req: NextRequest) {
 
     const {
         id,
+        api_id,
         name,
         description,
         default_prompt,
@@ -63,8 +64,9 @@ export async function POST(req: NextRequest) {
             .insert(models)
             .values({
                 id,
+                api_id,
                 name,
-                model_description: description,
+                description: description,
                 default_prompt,
                 max_token: max_token || null,
                 type,
@@ -75,7 +77,7 @@ export async function POST(req: NextRequest) {
                 target: models.id,
                 set: {
                     name,
-                    model_description: description,
+                    description: description,
                     default_prompt,
                     max_token,
                     type,

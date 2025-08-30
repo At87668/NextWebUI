@@ -61,6 +61,7 @@ Do not update document right after creating it. Wait for user feedback or reques
 
 const defaultModels: Array<{
   id: string;
+  api_id: '',
   name: string;
   model_description: string;
   default_prompt: string;
@@ -71,6 +72,7 @@ const defaultModels: Array<{
 }> = [
   {
     id: 'title-model',
+    api_id: '',
     name: 'Title Generation Model',
     model_description: 'Model for automatically generating chat titles.',
     default_prompt: titlePrompt,
@@ -81,6 +83,7 @@ const defaultModels: Array<{
   },
   {
     id: 'artifact-model',
+    api_id: '',
     name: 'Artifact Processing Model',
     model_description: 'Model for analyzing and processing artifacts such as code blocks, files, etc.',
     default_prompt: artifactsPrompt,

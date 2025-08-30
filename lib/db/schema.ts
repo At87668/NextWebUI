@@ -31,8 +31,9 @@ export const group = pgTable('Group', {
 
 export const models = pgTable('Models', {
   id: text('id').notNull().primaryKey(),
+  api_id: text('api_id').notNull(),
   name: text('name').notNull(),
-  model_description: text('description'),
+  description: text('description'),
   default_prompt: text('default_prompt'),
   max_token: integer('max_token'),
   type: varchar('type', { enum: ['openai', 'ollama'] })

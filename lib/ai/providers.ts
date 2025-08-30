@@ -14,12 +14,12 @@ export async function getDynamicProvider() {
         apiKey: m.api_key || process.env.OPENAI_API_KEY,
         baseURL: m.api_base_url || process.env.OPENAI_BASE_URL,
       });
-      languageModels[m.id] = openai.chat(m.id);
+      languageModels[m.id] = openai.chat(m.api_id);
     } else if (m.type === 'ollama') {
       const ollama = createOllama({
          baseURL: m.api_base_url || process.env.OLLAMA_BASE_URL,
       });
-      languageModels[m.id] = ollama.chat(m.id);
+      languageModels[m.id] = ollama.chat(m.api_id);
     }
   }
 
