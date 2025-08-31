@@ -11,13 +11,19 @@ const defaultGroups = [
   {
     group: 'guest',
     models: [] as string[],
-    max_message_per_day: 10,
+    max_message_per_day: 50,
     default_model: 'llama3',
   },
   {
     group: 'regular',
     models: ['llama3'],
-    max_message_per_day: 100,
+    max_message_per_day: 1000,
+    default_model: 'llama3',
+  },
+  {
+    group: 'admin',
+    models: ['llama3'],
+    max_message_per_day: 99999999999,
     default_model: 'llama3',
   },
 ];
