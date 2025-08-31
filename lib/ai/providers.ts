@@ -1,4 +1,8 @@
-import { customProvider } from 'ai';
+import {
+  customProvider,
+  wrapLanguageModel,
+  extractReasoningMiddleware,
+} from 'ai';
 import { createOpenAI } from '@ai-sdk/openai';
 import { db } from '../db/queries';
 import { models as modelsTable } from '../db/schema';
@@ -14,12 +18,18 @@ export async function getDynamicProvider() {
         apiKey: m.api_key || process.env.OPENAI_API_KEY,
         baseURL: m.api_base_url || process.env.OPENAI_BASE_URL,
       });
-      languageModels[m.id] = openai.chat(m.api_id);
+      languageModels[m.id] = wrapLanguageModel({
+        model: openai.chat(m.api_id),
+        middleware: extractReasoningMiddleware({ tagName: 'think' }),
+      });
     } else if (m.type === 'ollama') {
       const ollama = createOllama({
-         baseURL: m.api_base_url || process.env.OLLAMA_BASE_URL,
+        baseURL: m.api_base_url || process.env.OLLAMA_BASE_URL,
       });
-      languageModels[m.id] = ollama.chat(m.api_id);
+      languageModels[m.id] = wrapLanguageModel({
+        model: ollama.chat(m.api_id),
+        middleware: extractReasoningMiddleware({ tagName: 'think' }),
+      });
     }
   }
 
