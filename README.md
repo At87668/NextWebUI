@@ -39,9 +39,14 @@ This project is extended from [Chat SDK](https://chat-sdk.dev/) and uses the [AI
 
 You can deploy NextWebUI to Vercel with one click:
 
+**One-click deployment** *(all needed integrations will be created)*
+
+[![Deploy with Vercel](https://vercel.com/button?x-oss-process=image/resize,m_mfit,w_320,h_320)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FAt87668%2FNextWebUI&env=AUTH_SECRET,ADMIN_EMAIL&envDescription=You%20need%20to%20fill%20in%20these%20environment%20variables%20for%20the%20program%20to%20work.&envLink=https%3A%2F%2Fgithub.com%2FAt87668%2FNextWebUI%2Fblob%2Fmain%2F.env.example&project-name=nextwebui&repository-name=nextwebui-cloned&products=%5B%7B%22type%22%3A%22integration%22%2C%22protocol%22%3A%22storage%22%2C%22productSlug%22%3A%22neon%22%2C%22integrationSlug%22%3A%22neon%22%7D%2C%7B%22type%22%3A%22blob%22%7D%5D&integration-ids=oac_4nMvFhFSbAGAK6MU5mUFFILs)
+
+**Existing Environment** *(need to edit all environment variables yourself)*
+
 [![Deploy with Vercel](https://vercel.com/button?x-oss-process=image/resize,m_mfit,w_320,h_320)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FAt87668%2FNextWebUI&env=AUTH_SECRET,BLOB_READ_WRITE_TOKEN,POSTGRES_URL,REDIS_URL,ADMIN_EMAIL&envDescription=You%20need%20to%20fill%20in%20these%20environment%20variables%20for%20the%20program%20to%20work.&envLink=https%3A%2F%2Fgithub.com%2FAt87668%2FNextWebUI%2Fblob%2Fmain%2F.env.example&project-name=nextwebui&repository-name=nextwebui-cloned)
 
-(Still under development, not yet available)
 
 ## Run Locally
 

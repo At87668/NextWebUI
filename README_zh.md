@@ -39,6 +39,12 @@ NextWebUI 是一个基于 Next.js 构建的现代、高性能 AI 聊天用户界
 
 你可以通过一键部署将 NextWebUI 部署到 Vercel：
 
+**一键部署** *(将会创建所有需要的集成)*
+
+[![在 Vercel 上部署](https://vercel.com/button?x-oss-process=image/resize,m_mfit,w_320,h_320)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FAt87668%2FNextWebUI&env=AUTH_SECRET,ADMIN_EMAIL&envDescription=You%20need%20to%20fill%20in%20these%20environment%20variables%20for%20the%20program%20to%20work.&envLink=https%3A%2F%2Fgithub.com%2FAt87668%2FNextWebUI%2Fblob%2Fmain%2F.env.example&project-name=nextwebui&repository-name=nextwebui-cloned&products=%5B%7B%22type%22%3A%22integration%22%2C%22protocol%22%3A%22storage%22%2C%22productSlug%22%3A%22neon%22%2C%22integrationSlug%22%3A%22neon%22%7D%2C%7B%22type%22%3A%22blob%22%7D%5D&integration-ids=oac_4nMvFhFSbAGAK6MU5mUFFILs)
+
+**已有相关环境** *(需要自行编辑所有环境变量)*
+
 [![在 Vercel 上部署](https://vercel.com/button?x-oss-process=image/resize,m_mfit,w_320,h_320)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FAt87668%2FNextWebUI&env=AUTH_SECRET,BLOB_READ_WRITE_TOKEN,POSTGRES_URL,REDIS_URL,ADMIN_EMAIL&envDescription=You%20need%20to%20fill%20in%20these%20environment%20variables%20for%20the%20program%20to%20work.&envLink=https%3A%2F%2Fgithub.com%2FAt87668%2FNextWebUI%2Fblob%2Fmain%2F.env.example&project-name=nextwebui&repository-name=nextwebui-cloned)
 
 (仍在工作中, 暂不可用)
