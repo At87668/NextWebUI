@@ -47,3 +47,6 @@ docs.md
 
 # VS Code
 .vscode/
+
+# Migrations
+lib/db/migrations/

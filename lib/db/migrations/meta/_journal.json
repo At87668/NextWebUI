@@ -15,6 +15,20 @@
       "when": 1756380543219,
       "tag": "0001_gifted_bishop",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1756552286051,
+      "tag": "0002_lucky_jane_foster",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1756554045021,
+      "tag": "0003_panoramic_dark_phoenix",
+      "breakpoints": true
     }
   ]
 }

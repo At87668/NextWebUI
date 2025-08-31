@@ -429,7 +429,32 @@
   },
   "admin_board": {},
   "admin_panel": {
-    "button": "管理员面板"
+    "button": "管理员面板",
+    "error": {
+      "failed_to_load": "加载失败：无法连接到服务器."
+    },
+    "loading": "加载中...",
+    "title": "管理员面板",
+    "siderbar": {
+      "close": "收起侧边栏",
+      "open": "打开侧边栏"
+    },
+    "sub": {
+      "model": {
+        "title": "模型管理"
+      },
+      "group": {
+        "title": "用户组管理"
+      }
+    },
+    "back": {
+      "label": "返回上一页",
+      "button": "返回"
+    },
+    "theme": {
+      "to_light": "切换到浅色模式",
+      "to_dark": "切换到深色模式"
+    }
   },
   "admin": {
     "models": {
@@ -446,6 +471,68 @@
       "not_found": "用户组不存在",
       "update": {
         "fail": "更新失败"
+      }
+    },
+    "model_manage": {
+      "warn": {
+        "missing_parameter": "请填写 ID 和名称",
+        "null_name": "名称不能为空"
+      },
+      "add_model": {
+        "fail": "添加失败",
+        "success": "添加成功"
+      },
+      "system_model": "系统模型",
+      "id_cant_modify": "ID 不可修改",
+      "update_model": {
+        "fail": "更新失败",
+        "success": "更新成功"
+      },
+      "cant_del": "是系统保留模型，无法删除",
+      "remove_model": {
+        "confirm": "确定要删除该模型吗?",
+        "fail": "删除失败",
+        "success": "删除成功"
+      },
+      "ui": {
+        "title": "模型管理",
+        "add_new": "添加新模型",
+        "id_example": "例如: gpt-4o-test",
+        "internal_id": "内部 ID",
+        "api_id_example": "例如: gpt-4o",
+        "name": "名称",
+        "name_example": "如: GPT-4o 最新",
+        "description": "描述",
+        "placeholder": {
+          "description": "模型描述"
+        },
+        "max_token": "最大 Token",
+        "max_token_example": "例如: 8192",
+        "type": "类型",
+        "button": {
+          "add_model": "添加模型"
+        },
+        "existing_model": "现有模型",
+        "edit": "编辑",
+        "del": "删除",
+        "default_prompt": "默认提示词"
+      },
+      "edit_model": "编辑模型",
+      "system_model_id_cant_modify": "系统保留模型, ID 不可修改"
+    },
+    "group_manage": {
+      "update_group": {
+        "fail": "更新失败"
+      },
+      "ui": {
+        "group_permission_management": "用户组权限管理",
+        "default_model": "默认模型",
+        "max_message_per_day": "每日最大消息数",
+        "placeholder": {
+          "max_message_per_day": "留空为不限制"
+        },
+        "available_model": "可用模型",
+        "footer": "✅ 所有更改已实时保存到服务器"
       }
     }
   }

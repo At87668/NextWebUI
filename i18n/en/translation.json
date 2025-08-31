@@ -428,7 +428,32 @@
   },
   "admin_board": {},
   "admin_panel": {
-    "button": "Admin Panel"
+    "button": "Admin Panel",
+    "error": {
+      "failed_to_load": "Failed to load: Unable to connect to the server."
+    },
+    "loading": "Loading...",
+    "title": "Admin Panel",
+    "siderbar": {
+      "close": "Close Sidebar",
+      "open": "Open Sidebar"
+    },
+    "sub": {
+      "model": {
+        "title": "Model Management"
+      },
+      "group": {
+        "title": "Group Management"
+      }
+    },
+    "back": {
+      "label": "Back to previous page",
+      "button": "Back"
+    },
+    "theme": {
+      "to_light": "Switch to light mode",
+      "to_dark": "Switch to dark mode"
+    }
   },
   "admin": {
     "models": {
@@ -445,6 +470,68 @@
       "not_found": "User groups do not exist.",
       "update": {
         "fail": "Update failed."
+      }
+    },
+    "model_manage": {
+      "warn": {
+        "missing_parameter": "Please fill in the ID and name.",
+        "null_name": "The name cannot be empty."
+      },
+      "add_model": {
+        "fail": "Failed to add model",
+        "success": "Add model successfully."
+      },
+      "system_model": "System Model",
+      "id_cant_modify": "ID cannot be modified.",
+      "update_model": {
+        "fail": "Update failed",
+        "success": "Update model successfully."
+      },
+      "cant_del": "is system retention model that cannot be deleted.",
+      "remove_model": {
+        "confirm": "Are you sure you want to delete the model?",
+        "fail": "Delete failed",
+        "success": "Delete model successfully."
+      },
+      "ui": {
+        "title": "Model Management",
+        "add_new": "Add New Model",
+        "id_example": "Example: gpt-4o-test",
+        "internal_id": "Internal ID",
+        "api_id_example": "Example: gpt-4o",
+        "name": "Name",
+        "name_example": "Example: GPT-4o latest",
+        "description": "Description",
+        "placeholder": {
+          "description": "Model description"
+        },
+        "max_token": "Max Token",
+        "max_token_example": "Example: 8192",
+        "type": "Type",
+        "button": {
+          "add_model": "Add Model"
+        },
+        "existing_model": "Existing Model",
+        "edit": "Edit",
+        "del": "Delete",
+        "default_prompt": "Default Prompt"
+      },
+      "edit_model": "Edit Model",
+      "system_model_id_cant_modify": "System retains the model, and the ID cannot be modified"
+    },
+    "group_manage": {
+      "update_group": {
+        "fail": "Update failed"
+      },
+      "ui": {
+        "group_permission_management": "Group Permission Management",
+        "default_model": "Default Model",
+        "max_message_per_day": "Maximum Messages Per Day",
+        "placeholder": {
+          "max_message_per_day": "Leave blank as unlimited."
+        },
+        "available_model": "Available Model",
+        "footer": "✅ All changes are saved to the server in real time."
       }
     }
   }
