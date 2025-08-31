@@ -528,7 +528,7 @@
         "default_model": "Default Model",
         "max_message_per_day": "Maximum Messages Per Day",
         "placeholder": {
-          "max_message_per_day": "Leave blank as unlimited."
+          "max_message_per_day": "It cannot be empty."
         },
         "available_model": "Available Model",
         "footer": "✅ All changes are saved to the server in real time."

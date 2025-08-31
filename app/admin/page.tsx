@@ -484,7 +484,7 @@ function ModelManagement({ models, setModels }: { models: Model[]; setModels: (m
                   className="w-full border border-input bg-background text-foreground p-2 rounded"
                   value={editingModel.api_id || ''}
                   onChange={e => setEditingModel({ ...editingModel, api_id: e.target.value })}
-                  placeholder="如：gpt-4o-2024-08-06"
+                  placeholder="gpt-4o-2024-08-06"
                 />
               </div>
               <div>

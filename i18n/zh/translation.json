@@ -529,7 +529,7 @@
         "default_model": "默认模型",
         "max_message_per_day": "每日最大消息数",
         "placeholder": {
-          "max_message_per_day": "留空为不限制"
+          "max_message_per_day": "不能为空"
         },
         "available_model": "可用模型",
         "footer": "✅ 所有更改已实时保存到服务器"
