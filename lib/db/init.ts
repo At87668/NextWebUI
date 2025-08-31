@@ -23,7 +23,7 @@ const defaultGroups = [
   {
     group: 'admin',
     models: ['llama3'],
-    max_message_per_day: 99999999999,
+    max_message_per_day: null,
     default_model: 'llama3',
   },
 ];
