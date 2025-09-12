@@ -23,6 +23,7 @@ declare module 'next-auth' {
     id?: string;
     email?: string | null;
     nick?: string | null;
+    avatar?: string | null;
     type: UserType;
   }
 }
@@ -70,6 +71,7 @@ export const {
           id: user.id,
           email: user.email,
           nick: user.nick,
+          avatar: user.avatar,
           type:
             user.email === process.env.ADMIN_EMAIL
               ? 'admin'
@@ -86,6 +88,7 @@ export const {
           id: guestUser.id,
           email: guestUser.email,
           nick: '',
+          avatar: '',
           type: 'guest' as UserType,
         };
       },
@@ -97,6 +100,7 @@ export const {
         token.id = user.id as string;
         token.type = user.type;
         token.nick = user.nick;
+        token.avatar = user.avatar;
 
         if (user.type === 'guest') {
           token.exp = GUEST_JWT_EXPIRES_IN;
@@ -129,7 +133,10 @@ export const {
           token.type = session.user.type;
         }
         if (session?.nick) {
-          token.nick = session.nick;
+          token.nick = session.user.nick;
+        }
+        if (session?.avatar) {
+          token.avatar = session.user.avatar;
         }
       }
 
@@ -141,6 +148,7 @@ export const {
         session.user.id = token.id;
         session.user.type = token.type;
         session.user.nick = token.nick as string;
+        session.user.avatar = token.avatar as string;
         session.user.jti = token.session_jti;
       }
       return session;

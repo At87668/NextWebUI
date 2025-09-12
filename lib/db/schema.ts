@@ -18,6 +18,7 @@ export const user = pgTable('User', {
   email: varchar('email', { length: 64 }).notNull(),
   password: varchar('password', { length: 64 }),
   systemPrompt: text('systemPrompt'),
+  avatar: text('avatar'),
 });
 
 export const group = pgTable('Group', {

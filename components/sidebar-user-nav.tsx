@@ -70,6 +70,80 @@ export function SidebarUserNav({ user }: { user: User }) {
     'interface' | 'chat' | 'user' | 'about'
   >('interface');
 
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+const handleAvatarUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const file = e.target.files?.[0];
+  if (!file) return;
+
+  if (!file.type.startsWith('image/')) {
+    toast({ type: 'error', description: t('settings.tabs.user_.avatar_.invalid_type') });
+    return;
+  }
+
+  // Max 256x256
+  const img = typeof window !== 'undefined' ? new window.Image() : null;
+  if (!img) return;
+  img.src = URL.createObjectURL(file);
+  img.onload = () => {
+    if (img.width > 256 || img.height > 256) {
+      toast({ type: 'error', description: t('settings.tabs.user_.avatar_.too_large') });
+      return;
+    }
+
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const maxWidth = 256;
+    const maxHeight = 256;
+    let width = img.width;
+    let height = img.height;
+
+    if (width > height) {
+      if (width > maxWidth) {
+        height *= maxWidth / width;
+        width = maxWidth;
+      }
+    } else {
+      if (height > maxHeight) {
+        width *= maxHeight / height;
+        height = maxHeight;
+      }
+    }
+
+    canvas.width = width;
+    canvas.height = height;
+    ctx?.drawImage(img, 0, 0, width, height);
+
+    // To Base64 (JPEG Quality 0.8)
+    const base64 = canvas.toDataURL('image/jpeg', 0.8);
+    
+    setSelectedFile(file);
+    saveAvatar(base64);
+  };
+};
+
+const saveAvatar = async (base64: string) => {
+  setSaving(true);
+  try {
+    const res = await fetch('/api/user/update-avatar', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ avatar: base64 }),
+    });
+
+    if (res.ok) {
+      toast({ type: 'success', description: t('settings.tabs.user_.avatar_.update.success') });
+    } else {
+      const err = await res.json();
+      throw new Error(err.error || t('network.error'));
+    }
+  } catch (err) {
+    toast({ type: 'error', description: err instanceof Error ? err.message : t('network.error') });
+  } finally {
+    setSaving(false);
+  }
+};
+
   const [systemPrompt, setSystemPrompt] = useState('');
   useEffect(() => {
     async function fetchSystemPrompt() {
@@ -295,8 +369,8 @@ export function SidebarUserNav({ user }: { user: User }) {
                           key={tab.id}
                           type="button"
                           className={`flex items-center gap-3 px-4 py-3 text-sm font-medium text-left hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors border-r-2 ${activeTab === tab.id
-                              ? 'bg-zinc-200 dark:bg-zinc-700 border-blue-500 text-blue-600 dark:text-blue-400'
-                              : 'border-transparent text-zinc-700 dark:text-zinc-300'
+                            ? 'bg-zinc-200 dark:bg-zinc-700 border-blue-500 text-blue-600 dark:text-blue-400'
+                            : 'border-transparent text-zinc-700 dark:text-zinc-300'
                             }`}
                           onClick={() =>
                             setActiveTab(
@@ -365,8 +439,8 @@ export function SidebarUserNav({ user }: { user: User }) {
                             key={tab.id}
                             type="button"
                             className={`flex-1 flex items-center justify-center gap-2 px-3 py-3 text-xs sm:text-sm font-medium border-b-2 transition-colors ${activeTab === tab.id
-                                ? 'border-blue-500 text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
-                                : 'border-transparent text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'
+                              ? 'border-blue-500 text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
+                              : 'border-transparent text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'
                               }`}
                             onClick={() =>
                               setActiveTab(
@@ -673,29 +747,47 @@ export function SidebarUserNav({ user }: { user: User }) {
                         </p>
 
                         <div className="flex items-center gap-4 p-4 bg-zinc-50 dark:bg-zinc-800 rounded-lg border border-zinc-200 dark:border-zinc-700">
-                          <Image
-                            src={`https://www.gravatar.com/avatar/${md5((user.email ?? '').toLowerCase())}?d=identicon&s=64`}
-                            alt={user.email ?? t('settings.tabs.user_.avatar')}
-                            width={64}
-                            height={64}
-                            className="rounded-full border border-zinc-200 dark:border-zinc-700"
-                          />
+                          <div className="relative">
+                            {user.avatar ? (
+                              <Image
+                                src={user.avatar} // Base64 data URL
+                                alt={user.email ?? t('settings.tabs.user_.avatar')}
+                                width={64}
+                                height={64}
+                                className="rounded-full border border-zinc-200 dark:border-zinc-700"
+                              />
+                            ) : (
+                              <div className="w-16 h-16 rounded-full bg-zinc-200 dark:bg-zinc-700 flex items-center justify-center border-2 border-dashed border-zinc-300 dark:border-zinc-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                </svg>
+                              </div>
+                            )}
+                            <label className="absolute bottom-0 right-0 bg-blue-600 text-white rounded-full p-1 cursor-pointer shadow-md hover:bg-blue-700 transition-colors">
+                              <input
+                                type="file"
+                                accept="image/*"
+                                className="hidden"
+                                onChange={handleAvatarUpload}
+                                disabled={saving}
+                              />
+                              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                              </svg>
+                            </label>
+                          </div>
 
                           <div className="flex-1">
                             {!isEditing ? (
                               <div>
                                 <div className="font-medium text-zinc-900 dark:text-zinc-100 flex items-center gap-1 group">
                                   <span className="text-sm">
-                                    {session?.user?.nick
-                                      ? session.user.nick
-                                      : user.email}
+                                    {session?.user?.nick ? session.user.nick : user.email}
                                   </span>
                                   <button
                                     type="button"
                                     className="w-4 h-4 opacity-0 group-hover:opacity-40 hover:opacity-100 text-zinc-500 hover:text-blue-600 dark:hover:text-blue-400 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
-                                    aria-label={t(
-                                      'settings.tabs.user_.nick.edit',
-                                    )}
+                                    aria-label={t('settings.tabs.user_.nick.edit')}
                                     onClick={() => setIsEditing(true)}
                                   >
                                     <svg
@@ -723,14 +815,10 @@ export function SidebarUserNav({ user }: { user: User }) {
                                 userId={user.id ?? ''}
                                 onSave={() => {
                                   setIsEditing(false);
-                                  console.debug(
-                                    `[DEBUG] Nick: ${session?.user?.nick}`,
-                                  );
+                                  console.debug(`[DEBUG] Nick: ${session?.user?.nick}`);
                                   toast({
                                     type: 'success',
-                                    description: t(
-                                      'settings.tabs.user_.nick.update.success',
-                                    ),
+                                    description: t('settings.tabs.user_.nick.update.success'),
                                   });
                                 }}
                                 onCancel={() => setIsEditing(false)}
@@ -739,14 +827,9 @@ export function SidebarUserNav({ user }: { user: User }) {
 
                             <div className="text-xs text-zinc-500 dark:text-zinc-400 mt-2">
                               {t('settings.tabs.user_.avatar_.description')}
-                              <a
-                                href="https://www.gravatar.com"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="underline text-blue-600 dark:text-blue-400"
-                              >
-                                {t('settings.tabs.user_.avatar_.gravatar')}
-                              </a>
+                              <span className="font-medium text-green-600 dark:text-green-400">
+                                {t('settings.tabs.user_.avatar_.local_upload')}
+                              </span>
                               {t('settings.tabs.user_.avatar_.description_')}
                             </div>
                           </div>
