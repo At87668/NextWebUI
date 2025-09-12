@@ -25,7 +25,7 @@ export const group = pgTable('Group', {
   models: varchar('models', { length: 255 })
     .array()
     .notNull(),
-  max_message_per_day: integer('max_message_per_day'),
+  max_message_per_day: integer('max_message_per_day').notNull(),
   default_model: text('default_model').notNull(),
 });
 
