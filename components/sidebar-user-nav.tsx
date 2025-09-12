@@ -168,7 +168,6 @@ export function SidebarUserNav({ user }: { user: User }) {
             side="top"
             className="w-[--radix-popper-anchor-width]"
           >
-            {/* 设置项与分割线 */}
             <DropdownMenuItem
               data-testid="user-nav-item-settings"
               className="flex cursor-pointer gap-2"
@@ -180,7 +179,6 @@ export function SidebarUserNav({ user }: { user: User }) {
 
             <DropdownMenuSeparator />
 
-            {/* 管理员面板按钮 */}
             {isAdmin && (
               <DropdownMenuItem
                 data-testid="user-nav-item-admin-board"
@@ -195,8 +193,6 @@ export function SidebarUserNav({ user }: { user: User }) {
             )}
 
             <DropdownMenuSeparator />
-
-            {/* 登录/登出按钮 */}
             <DropdownMenuItem asChild data-testid="user-nav-item-auth">
               <button
                 type="button"
