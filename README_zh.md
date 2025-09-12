@@ -47,8 +47,6 @@ NextWebUI 是一个基于 Next.js 构建的现代、高性能 AI 聊天用户界
 
 [![在 Vercel 上部署](https://vercel.com/button?x-oss-process=image/resize,m_mfit,w_320,h_320)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FAt87668%2FNextWebUI&env=AUTH_SECRET,BLOB_READ_WRITE_TOKEN,POSTGRES_URL,REDIS_URL,ADMIN_EMAIL&envDescription=You%20need%20to%20fill%20in%20these%20environment%20variables%20for%20the%20program%20to%20work.&envLink=https%3A%2F%2Fgithub.com%2FAt87668%2FNextWebUI%2Fblob%2Fmain%2F.env.example&project-name=nextwebui&repository-name=nextwebui-cloned)
 
-(仍在工作中, 暂不可用)
-
 ## 本地运行
 
 你需要在 [.env.example]((./.env.example)) 文件中定义环境变量来运行 NextWebUI。建议你使用 [Vercel 环境变量](https://vercel.com/docs/projects/environment-variables)，但创建一个 `.env` 文件也足够了。
