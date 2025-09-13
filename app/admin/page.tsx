@@ -4,6 +4,16 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { useTranslation } from 'react-i18next';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
 import '@/i18n/index';
 
 type Model = {
@@ -203,6 +213,14 @@ function ModelManagement({ models, setModels }: { models: Model[]; setModels: (m
   });
 
   const [editingModel, setEditingModel] = useState<Model | null>(null);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const [modelToDelete, setModelToDelete] = useState<string | null>(null);
+  // 健壮关闭逻辑，防止多次setState
+  const handleCloseDialog = () => {
+    setIsDeleteDialogOpen(false);
+    setTimeout(() => setModelToDelete(null), 200);
+  };
+  const [saving, setSaving] = useState(false);
 
   const addModel = async () => {
     if (!newModel.id || !newModel.name) {
@@ -276,7 +294,7 @@ function ModelManagement({ models, setModels }: { models: Model[]; setModels: (m
       default_prompt: editingModel.default_prompt || null,
       api_base_url: editingModel.api_base_url || null,
       api_key: editingModel.api_key || null,
-      api_id: editingModel.api_id || null,
+      api_id: editingModel.api_id || '',
     };
 
     try {
@@ -296,21 +314,13 @@ function ModelManagement({ models, setModels }: { models: Model[]; setModels: (m
     }
   };
 
-  const deleteModel = async (id: string) => {
+  const handleDeleteModel = (id: string) => {
     if (['title-model', 'artifact-model'].includes(id)) {
       toast.error(`${id} ${t('admin.model_manage.cant_del')}`);
       return;
     }
-
-    if (!confirm(t('admin.model_manage.remove_model.confirm'))) return;
-    try {
-      const res = await fetch(`/api/admin/models/${id}`, { method: 'DELETE' });
-      if (!res.ok) throw new Error(t('admin.model_manage.remove_model.fail'));
-      setModels(models.filter(m => m.id !== id));
-      toast.success(t('admin.model_manage.remove_model.success'));
-    } catch (err) {
-      toast.error(`${t('admin.model_manage.remove_model.fail')}: ${err instanceof Error ? err.message : String(err)}`);
-    }
+    setModelToDelete(id);
+    setIsDeleteDialogOpen(true);
   };
 
   return (
@@ -440,7 +450,7 @@ function ModelManagement({ models, setModels }: { models: Model[]; setModels: (m
               </button>
               <button
                 type="button"
-                onClick={() => deleteModel(model.id)}
+                onClick={() => handleDeleteModel(model.id)}
                 className="text-xs px-2 py-1 bg-red-100 text-red-800 rounded hover:bg-red-200"
                 disabled={['title-model', 'artifact-model'].includes(model.id)}
               >
@@ -583,6 +593,54 @@ function ModelManagement({ models, setModels }: { models: Model[]; setModels: (m
           </div>
         </div>
       )}
+      <AlertDialog
+        open={isDeleteDialogOpen}
+        onOpenChange={open => {
+          if (!open) handleCloseDialog();
+          else setIsDeleteDialogOpen(true);
+        }}
+      >
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>
+              {t('admin.model_manage.remove_model.confirm_title')}
+            </AlertDialogTitle>
+            <AlertDialogDescription>
+              {t('admin.model_manage.remove_model.confirm', { modelId: modelToDelete })}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={handleCloseDialog}>
+              {t('button.cancel')}
+            </AlertDialogCancel>
+            <AlertDialogAction
+              onClick={async () => {
+                if (!modelToDelete) return;
+                setSaving(true);
+                try {
+                  const res = await fetch(`/api/admin/models/${modelToDelete}`, {
+                    method: 'DELETE',
+                  });
+                  if (!res.ok) {
+                    throw new Error(t('admin.model_manage.remove_model.fail'));
+                  }
+                  setModels(models.filter(m => m.id !== modelToDelete));
+                  toast.success(t('admin.model_manage.remove_model.success'));
+                } catch (err) {
+                  toast.error(
+                    `${t('admin.model_manage.remove_model.fail')}: ${err instanceof Error ? err.message : String(err)}`
+                  );
+                } finally {
+                  setSaving(false);
+                  handleCloseDialog();
+                }
+              }}
+            >
+              {t('button.delete')}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }

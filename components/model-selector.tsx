@@ -42,7 +42,7 @@ export function ModelSelector(
         const response = await fetch('/api/ai/models');
         
         if (!response.ok) {
-          throw new Error('Failed to fetch models');
+          throw Error('Failed to fetch models');
         }
         
         const models: ChatModel[] = await response.json();

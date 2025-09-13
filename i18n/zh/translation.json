@@ -309,7 +309,8 @@
     "continue": "继续",
     "login": "登录你的账户",
     "logout": "退出登录",
-    "add": "添加"
+    "add": "添加",
+    "cancel": "取消"
   },
   "settings": {
     "title": "设置",
@@ -492,7 +493,8 @@
       "remove_model": {
         "confirm": "确定要删除该模型吗?",
         "fail": "删除失败",
-        "success": "删除成功"
+        "success": "删除成功",
+        "confirm_title": "删除模型"
       },
       "ui": {
         "title": "模型管理",

@@ -71,6 +71,8 @@ export function SidebarUserNav({ user }: { user: User }) {
   >('interface');
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [localAvatarUrl, setLocalAvatarUrl] = useState<string | null>(null);
+  const lastObjectUrlRef = useRef<string | null>(null);
 
 const handleAvatarUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
   const file = e.target.files?.[0];
@@ -81,13 +83,22 @@ const handleAvatarUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     return;
   }
 
+  if (lastObjectUrlRef.current) {
+    URL.revokeObjectURL(lastObjectUrlRef.current);
+    lastObjectUrlRef.current = null;
+  }
+
   // Max 256x256
   const img = typeof window !== 'undefined' ? new window.Image() : null;
   if (!img) return;
-  img.src = URL.createObjectURL(file);
+  const objectUrl = URL.createObjectURL(file);
+  lastObjectUrlRef.current = objectUrl;
+  img.src = objectUrl;
   img.onload = () => {
     if (img.width > 256 || img.height > 256) {
       toast({ type: 'error', description: t('settings.tabs.user_.avatar_.too_large') });
+      URL.revokeObjectURL(objectUrl);
+      lastObjectUrlRef.current = null;
       return;
     }
 
@@ -116,13 +127,14 @@ const handleAvatarUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
 
     // To Base64 (JPEG Quality 0.8)
     const base64 = canvas.toDataURL('image/jpeg', 0.8);
-    
+
     setSelectedFile(file);
-    saveAvatar(base64);
+    setLocalAvatarUrl(objectUrl);
+    saveAvatar(base64, objectUrl);
   };
 };
 
-const saveAvatar = async (base64: string) => {
+const saveAvatar = async (base64: string, objectUrl?: string) => {
   setSaving(true);
   try {
     const res = await fetch('/api/user/update-avatar', {
@@ -132,17 +144,40 @@ const saveAvatar = async (base64: string) => {
     });
 
     if (res.ok) {
+      const data = await res.json();
       toast({ type: 'success', description: t('settings.tabs.user_.avatar_.update.success') });
+      setLocalAvatarUrl(data.avatar || null);
+      setTimeout(() => {
+        router.refresh();
+        setLocalAvatarUrl(null);
+        if (objectUrl) {
+          URL.revokeObjectURL(objectUrl);
+          if (lastObjectUrlRef.current === objectUrl) lastObjectUrlRef.current = null;
+        }
+      }, 1000);
     } else {
       const err = await res.json();
       throw new Error(err.error || t('network.error'));
     }
   } catch (err) {
     toast({ type: 'error', description: err instanceof Error ? err.message : t('network.error') });
+    if (objectUrl) {
+      URL.revokeObjectURL(objectUrl);
+      if (lastObjectUrlRef.current === objectUrl) lastObjectUrlRef.current = null;
+    }
+    setLocalAvatarUrl(null);
   } finally {
     setSaving(false);
   }
 };
+  useEffect(() => {
+    return () => {
+      if (lastObjectUrlRef.current) {
+        URL.revokeObjectURL(lastObjectUrlRef.current);
+        lastObjectUrlRef.current = null;
+      }
+    };
+  }, []);
 
   const [systemPrompt, setSystemPrompt] = useState('');
   useEffect(() => {
@@ -216,15 +251,31 @@ const saveAvatar = async (base64: string) => {
                 session-testid="user-nav-button"
                 className="session-[state=open]:bg-sidebar-accent bg-background session-[state=open]:text-sidebar-accent-foreground h-10"
               >
-                <Image
-                  src={`https://www.gravatar.com/avatar/${md5((user.email ?? '').toLowerCase())}?d=identicon&s=24`}
-                  alt={
-                    user.email ?? t('components.sidebar_user_nav.user.avatar')
-                  }
-                  width={24}
-                  height={24}
-                  className="rounded-full"
-                />
+                {localAvatarUrl ? (
+                  <Image
+                    src={localAvatarUrl}
+                    alt={user.email ?? t('components.sidebar_user_nav.user.avatar')}
+                    width={24}
+                    height={24}
+                    className="rounded-full"
+                  />
+                ) : user.avatar ? (
+                  <Image
+                    src={user.avatar}
+                    alt={user.email ?? t('components.sidebar_user_nav.user.avatar')}
+                    width={24}
+                    height={24}
+                    className="rounded-full"
+                  />
+                ) : (
+                  <Image
+                    src={`https://www.gravatar.com/avatar/${md5((user.email ?? '').toLowerCase())}?d=identicon&s=24`}
+                    alt={user.email ?? t('components.sidebar_user_nav.user.avatar')}
+                    width={24}
+                    height={24}
+                    className="rounded-full"
+                  />
+                )}
                 <span session-testid="user-email" className="truncate">
                   {isGuest
                     ? t('auth.user.type.guest')
@@ -748,9 +799,17 @@ const saveAvatar = async (base64: string) => {
 
                         <div className="flex items-center gap-4 p-4 bg-zinc-50 dark:bg-zinc-800 rounded-lg border border-zinc-200 dark:border-zinc-700">
                           <div className="relative">
-                            {user.avatar ? (
+                            {localAvatarUrl ? (
                               <Image
-                                src={user.avatar} // Base64 data URL
+                                src={localAvatarUrl}
+                                alt={user.email ?? t('settings.tabs.user_.avatar')}
+                                width={64}
+                                height={64}
+                                className="rounded-full border border-zinc-200 dark:border-zinc-700"
+                              />
+                            ) : user.avatar ? (
+                              <Image
+                                src={user.avatar}
                                 alt={user.email ?? t('settings.tabs.user_.avatar')}
                                 width={64}
                                 height={64}

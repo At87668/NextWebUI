@@ -67,11 +67,16 @@ export const {
         const passwordsMatch = await compare(password, user.password);
         if (!passwordsMatch) return null;
 
+        // 只允许 URL 作为 avatar
+        let avatarUrl = user.avatar;
+        if (avatarUrl?.startsWith('data:image/')) {
+          avatarUrl = '';
+        }
         return {
           id: user.id,
           email: user.email,
           nick: user.nick,
-          avatar: user.avatar,
+          avatar: avatarUrl,
           type:
             user.email === process.env.ADMIN_EMAIL
               ? 'admin'
@@ -100,7 +105,8 @@ export const {
         token.id = user.id as string;
         token.type = user.type;
         token.nick = user.nick;
-        token.avatar = user.avatar;
+        // 只允许 URL 作为 avatar
+        token.avatar = (user.avatar && typeof user.avatar === 'string' && user.avatar.startsWith('data:image/')) ? '' : user.avatar;
 
         if (user.type === 'guest') {
           token.exp = GUEST_JWT_EXPIRES_IN;
@@ -136,7 +142,7 @@ export const {
           token.nick = session.user.nick;
         }
         if (session?.avatar) {
-          token.avatar = session.user.avatar;
+          token.avatar = (session.user.avatar && typeof session.user.avatar === 'string' && session.user.avatar.startsWith('data:image/')) ? '' : session.user.avatar;
         }
       }
 

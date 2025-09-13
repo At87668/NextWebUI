@@ -309,7 +309,8 @@
     "continue": "Continue",
     "login": "Login your account",
     "logout": "Logout",
-    "add": "Add"
+    "add": "Add",
+    "cancel": "Cencel"
   },
   "settings": {
     "title": "Settings",
@@ -491,7 +492,8 @@
       "remove_model": {
         "confirm": "Are you sure you want to delete the model?",
         "fail": "Delete failed",
-        "success": "Delete model successfully."
+        "success": "Delete model successfully.",
+        "confirm_title": "Delete Model"
       },
       "ui": {
         "title": "Model Management",

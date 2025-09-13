@@ -44,17 +44,13 @@ export async function getEntitlementsByUserType(userType: UserType): Promise<Ent
 
   let maxMessagesPerDay: number | null = null;
 
-  if (userType === 'admin') {
-    console.info('Admin user detected: granting unlimited messages and full model access.');
+  if (typeof maxMessagePerDay === 'number' && maxMessagePerDay > 0) {
+    maxMessagesPerDay = maxMessagePerDay;
   } else {
-    if (typeof maxMessagePerDay === 'number' && maxMessagePerDay > 0) {
-      maxMessagesPerDay = maxMessagePerDay;
-    } else {
-      console.warn(
-        `Invalid or missing max_message_per_day for ${userType}: ${maxMessagePerDay}. Using default 100.`
-      );
-      maxMessagesPerDay = 100;
-    }
+    console.warn(
+      `Invalid or missing max_message_per_day for ${userType}: ${maxMessagePerDay}. Using default 100.`
+    );
+    maxMessagesPerDay = 100;
   }
 
   return {
