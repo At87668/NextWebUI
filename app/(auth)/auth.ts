@@ -133,16 +133,30 @@ export const {
       }
 
       if (trigger === 'update') {
-        // session may be partial; ensure session.user exists before reading its properties
-        if (session?.user) {
-          token.id = session.user.id;
-          token.type = session.user.type;
+        // session may be partial; support both top-level fields and session.user
+        // e.g. update({ nick }) will pass { nick } at top-level, while some flows may pass session.user
+        if (session) {
+          // preserve existing id/type unless provided
+          if (session.user) {
+            token.id = session.user.id;
+            token.type = session.user.type;
+          }
 
-          if (session.user.nick) {
+          // nickname: prefer top-level session.nick (update({ nick })) over session.user.nick
+          // @ts-ignore - session shape can be partial
+          if (typeof (session as any).nick === 'string') {
+            // @ts-ignore
+            token.nick = (session as any).nick;
+          } else if (session.user?.nick) {
             token.nick = session.user.nick;
           }
 
-          if (typeof session.user.avatar === 'string') {
+          // avatar: also accept top-level session.avatar
+          // @ts-ignore
+          if (typeof (session as any).avatar === 'string') {
+            // @ts-ignore
+            token.avatar = (session as any).avatar?.startsWith('data:image/') ? '' : (session as any).avatar;
+          } else if (typeof session.user?.avatar === 'string') {
             token.avatar = session.user.avatar?.startsWith('data:image/') ? '' : session.user.avatar;
           }
         }
