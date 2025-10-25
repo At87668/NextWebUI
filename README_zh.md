@@ -63,7 +63,7 @@ NextWebUI 是一个基于 Next.js 构建的现代、高性能 AI 聊天用户界
 >
 > pnpm dev
 
-你的 NextWebUI 应用现在应该在 [localhost:3001](http://localhost:3001/) 上运行。
+你的 NextWebUI 应用现在应该在 [localhost:3000](http://localhost:3000/) 上运行。
 
 ## 鸣谢
 - **Vercel**: 非常感谢Vercel创建了ChatSDK, 这为NextWebUI的开发节省了很多工作量.

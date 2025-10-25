@@ -62,7 +62,7 @@ You need to run NextWebUI using the environment variables defined in the [.env.e
 >
 > pnpm dev
 
-Your NextWebUI application should now be running at [localhost:3001](http://localhost:3001/).
+Your NextWebUI application should now be running at [localhost:3000](http://localhost:3000/).
 
 ## Acknowledgement
 - **Vercel**: Many thanks to Vercel for creating ChatSDK, which greatly reduced development effort for NextWebUI.
