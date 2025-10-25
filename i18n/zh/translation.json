@@ -364,7 +364,13 @@
         "avatar_": {
           "description": "如需更换头像，请前往 ",
           "gravatar": "Gravatar",
-          "description_": " 网站设置，系统将自动同步。"
+          "description_": " 网站设置，系统将自动同步。",
+          "invalid_type": "无效的图像类型",
+          "too_large": "图像过大",
+          "update": {
+            "success": "上传成功"
+          },
+          "local_upload": "上传"
         },
         "change_password": {
           "title": "修改密码",

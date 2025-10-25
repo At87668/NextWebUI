@@ -9,6 +9,10 @@ const nextConfig: NextConfig = {
       {
         hostname: 'www.gravatar.com',
       },
+      // Allow Vercel Blob public store hosts like <store>.public.blob.vercel-storage.com
+      {
+        hostname: '*.public.blob.vercel-storage.com',
+      },
     ],
   },
 };

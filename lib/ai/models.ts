@@ -10,7 +10,7 @@ export async function getChatModelsFromDB(): Promise<ChatModel[]> {
   const result = await db.select({
     id: modelsTable.id,
     name: modelsTable.name,
-    description: modelsTable.model_description,
+    description: modelsTable.description,
   }).from(modelsTable);
   return result.map(({ id, name, description }) => ({
     id,

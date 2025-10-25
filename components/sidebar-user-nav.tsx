@@ -65,7 +65,7 @@ export function SidebarUserNav({ user }: { user: User }) {
   const [originalPrompt, setOriginalPrompt] = useState('');
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
-  const { data: session, status } = useSession();
+  const { data: session, status, update } = useSession();
   const [activeTab, setActiveTab] = useState<
     'interface' | 'chat' | 'user' | 'about'
   >('interface');
@@ -137,19 +137,45 @@ const handleAvatarUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
 const saveAvatar = async (base64: string, objectUrl?: string) => {
   setSaving(true);
   try {
-    const res = await fetch('/api/user/update-avatar', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ avatar: base64 }),
-    });
+    let res: Response;
+
+    // If a File was selected, prefer FormData upload (no Content-Type header)
+    if (selectedFile) {
+      const fd = new FormData();
+      fd.append('file', selectedFile);
+      res = await fetch('/api/user/update-avatar', {
+        method: 'POST',
+        body: fd,
+      });
+    } else {
+      res = await fetch('/api/user/update-avatar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ avatar: base64 }),
+      });
+    }
 
     if (res.ok) {
       const data = await res.json();
       toast({ type: 'success', description: t('settings.tabs.user_.avatar_.update.success') });
       setLocalAvatarUrl(data.avatar || null);
+
+      // Update next-auth session so UI reflects new avatar immediately (if available)
+      try {
+        if (update && data?.avatar) {
+          // update may accept partial session fields
+          await update({ avatar: data.avatar });
+        }
+      } catch (err) {
+        // ignore session update errors
+        console.debug('Session update failed', err);
+      }
+
       setTimeout(() => {
         router.refresh();
         setLocalAvatarUrl(null);
+        // clear selected file and object URL
+        setSelectedFile(null);
         if (objectUrl) {
           URL.revokeObjectURL(objectUrl);
           if (lastObjectUrlRef.current === objectUrl) lastObjectUrlRef.current = null;
@@ -159,13 +185,13 @@ const saveAvatar = async (base64: string, objectUrl?: string) => {
       const err = await res.json();
       throw new Error(err.error || t('network.error'));
     }
-  } catch (err) {
+    } catch (err) {
     toast({ type: 'error', description: err instanceof Error ? err.message : t('network.error') });
-    if (objectUrl) {
-      URL.revokeObjectURL(objectUrl);
-      if (lastObjectUrlRef.current === objectUrl) lastObjectUrlRef.current = null;
-    }
-    setLocalAvatarUrl(null);
+      if (objectUrl) {
+        URL.revokeObjectURL(objectUrl);
+        if (lastObjectUrlRef.current === objectUrl) lastObjectUrlRef.current = null;
+      }
+      setLocalAvatarUrl(null);
   } finally {
     setSaving(false);
   }
@@ -883,14 +909,6 @@ const saveAvatar = async (base64: string, objectUrl?: string) => {
                                 onCancel={() => setIsEditing(false)}
                               />
                             )}
-
-                            <div className="text-xs text-zinc-500 dark:text-zinc-400 mt-2">
-                              {t('settings.tabs.user_.avatar_.description')}
-                              <span className="font-medium text-green-600 dark:text-green-400">
-                                {t('settings.tabs.user_.avatar_.local_upload')}
-                              </span>
-                              {t('settings.tabs.user_.avatar_.description_')}
-                            </div>
                           </div>
                         </div>
 

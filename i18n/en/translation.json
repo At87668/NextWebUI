@@ -363,7 +363,13 @@
         "avatar_": {
           "description": "To change your avatar, go to ",
           "gravatar": "Gravatar",
-          "description_": " to setting, system will automatically sync."
+          "description_": " to setting, system will automatically sync.",
+          "invalid_type": "Invalid image type.",
+          "too_large": "Image too large.",
+          "update": {
+            "success": "Update successed."
+          },
+          "local_upload": "upload"
         },
         "change_password": {
           "title": "Change Password",
